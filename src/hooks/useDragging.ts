@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
-import { useProcessFile } from "./useProcessFile";
 
-export const useDragging = () => {
+type ProcessFile = (file: File) => void;
+
+export const useDragging = (processFile: ProcessFile) => {
   const [isDragging, setIsDragging] = React.useState(false);
-  const { processFile } = useProcessFile();
 
   const handleDragOver = React.useCallback((e: React.DragEvent) => {
     e.preventDefault();

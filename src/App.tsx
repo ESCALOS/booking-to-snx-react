@@ -4,14 +4,15 @@ import { useDragging } from "./hooks/useDragging";
 import { useProcessFile } from "./hooks/useProcessFile";
 
 function App() {
+  const { processFile, isLoading, fileName, xmlContent, handleDownload } =
+    useProcessFile();
   const {
     isDragging,
     handleDragOver,
     handleDragLeave,
     handleDrop,
     handleFileInput,
-  } = useDragging();
-  const { isLoading, fileName, xmlContent, handleDownload } = useProcessFile();
+  } = useDragging(processFile);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1B4965] to-[#5FA8D3] flex items-center justify-center p-4">
