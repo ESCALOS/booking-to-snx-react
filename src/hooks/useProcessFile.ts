@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import * as XLSX from "xlsx";
-import { Booking, Reefer } from "../types";
+import { BookingExcel } from "../types";
 import { downloadXML, generateXML } from "../utils";
 
 export const useProcessFile = () => {
@@ -17,13 +17,13 @@ export const useProcessFile = () => {
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data);
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json<Booking>(worksheet, {
+      const jsonData = XLSX.utils.sheet_to_json<BookingExcel>(worksheet, {
         raw: false,
       });
 
       if (jsonData.length > 0) {
-        for (const bookingJson of jsonData) {
-          const booking: Booking = {
+        const bookings = jsonData.map((bookingJson) => {
+          return {
             nbr: bookingJson.nbr?.toString() || undefined,
             line: bookingJson.line?.toString() || undefined,
             pol: bookingJson.pol?.toString() || undefined,
@@ -50,7 +50,7 @@ export const useProcessFile = () => {
               bookingJson.empty_pickup_location?.toString() || undefined,
             full_return_location:
               bookingJson.full_return_location?.toString() || undefined,
-            categorty: bookingJson.categorty?.toString() || undefined,
+            category: bookingJson.category?.toString() || undefined,
             notes: bookingJson.notes?.toString() || undefined,
             created_by: bookingJson.created_by?.toString() || undefined,
             created_date: bookingJson.created_date?.toString() || undefined,
@@ -59,14 +59,92 @@ export const useProcessFile = () => {
             quantity:
               parseFloat(bookingJson.quantity?.toString() ?? "") || undefined,
             carrier: {
-              id: bookingJson.carrier?.id?.toString() || undefined,
-              facility: bookingJson.carrier?.facility?.toString() || undefined,
-              mode: bookingJson.carrier?.mode?.toString() || undefined,
+              id: bookingJson.carrier_id?.toString() || undefined,
+              facility: bookingJson.carrier_facility?.toString() || undefined,
+              mode: bookingJson.carrier_mode?.toString() || undefined,
             },
+            items: [
+              {
+                qty:
+                  parseFloat(bookingJson.item_qty?.toString() ?? "") ||
+                  undefined,
+                eq_size: bookingJson.item_eq_size?.toString() || undefined,
+                eq_iso_group:
+                  bookingJson.item_eq_iso_group?.toString() || undefined,
+                eq_height: bookingJson.item_eq_height?.toString() || undefined,
+                eq_iso_group_description:
+                  bookingJson.item_eq_iso_group_description?.toString() ||
+                  undefined,
+                equipment_type:
+                  bookingJson.item_equipment_type?.toString() || undefined,
+                equip_type_description:
+                  bookingJson.item_equip_type_description?.toString() ||
+                  undefined,
+                seq_nbr: bookingJson.item_seq_nbr?.toString() || undefined,
+                tally_limit:
+                  bookingJson.item_tally_limit?.toString() || undefined,
+                eq_material:
+                  bookingJson.item_eq_material?.toString() || undefined,
+                eq_grade: bookingJson.item_eq_grade?.toString() || undefined,
+                gross_weight:
+                  parseFloat(bookingJson.item_gross_weight?.toString() ?? "") ||
+                  undefined,
+                commodity_id:
+                  bookingJson.item_commodity_id?.toString() || undefined,
+                commodity_name:
+                  bookingJson.item_commodity_name?.toString() || undefined,
+                receive_limit:
+                  parseFloat(
+                    bookingJson.item_receive_limit?.toString() ?? ""
+                  ) || undefined,
+                remarks: bookingJson.item_remarks?.toString() || undefined,
+                created_by:
+                  bookingJson.item_created_by?.toString() || undefined,
+                created_date:
+                  bookingJson.item_created_date?.toString() || undefined,
+                reefer: {
+                  temp_reqd_c:
+                    parseFloat(
+                      bookingJson.reefer_temp_reqd_c?.toString() ?? ""
+                    ) || undefined,
+                  humidity_pct:
+                    parseFloat(
+                      bookingJson.reefer_humidity_pct?.toString() ?? ""
+                    ) || undefined,
+                  vent_required_value:
+                    parseFloat(
+                      bookingJson.reefer_vent_required_value?.toString() ?? ""
+                    ) || undefined,
+                  vent_required_unit:
+                    bookingJson.reefer_vent_required_unit?.toString() ||
+                    undefined,
+                  co2_pct:
+                    parseFloat(bookingJson.reefer_co2_pct?.toString() ?? "") ||
+                    undefined,
+                  o2_pct:
+                    parseFloat(bookingJson.reefer_o2_pct?.toString() ?? "") ||
+                    undefined,
+                },
+                oog: {
+                  is_oog:
+                    bookingJson.oog_is_oog?.toString() === "Y" ? true : false,
+                  oog_back_cm:
+                    bookingJson.oog_oog_back_cm?.toString() || undefined,
+                  oog_front_cm:
+                    bookingJson.oog_oog_front_cm?.toString() || undefined,
+                  oog_left_cm:
+                    bookingJson.oog_oog_left_cm?.toString() || undefined,
+                  oog_right_cm:
+                    bookingJson.oog_oog_right_cm?.toString() || undefined,
+                  oog_top_cm:
+                    bookingJson.oog_oog_top_cm?.toString() || undefined,
+                },
+              },
+            ],
           };
-        }
+        });
 
-        const xml = generateXML(booking);
+        const xml = generateXML(bookings);
         setXmlContent(xml);
       }
     } catch (error) {

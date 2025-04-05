@@ -1,7 +1,8 @@
-import { FileUp, Loader2, Download } from "lucide-react";
+import { FileUp, Loader2 } from "lucide-react";
 
 import { useDragging } from "./hooks/useDragging";
 import { useProcessFile } from "./hooks/useProcessFile";
+import XmlContent from "./components/XmlContent";
 
 function App() {
   const { processFile, isLoading, fileName, xmlContent, handleDownload } =
@@ -15,7 +16,7 @@ function App() {
   } = useDragging(processFile);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1B4965] to-[#5FA8D3] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#651b1b] to-[#d35f5f] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div
           className={`
@@ -41,12 +42,12 @@ function App() {
           <div className="flex flex-col items-center justify-center text-center">
             {isLoading ? (
               <>
-                <Loader2 className="w-12 h-12 text-[#CAE9FF] animate-spin mb-4" />
+                <Loader2 className="w-12 h-12 text-[#ffcaca] animate-spin mb-4" />
                 <p className="text-[#CAE9FF]">Procesando {fileName}...</p>
               </>
             ) : (
               <>
-                <FileUp className="w-12 h-12 text-[#CAE9FF] mb-4" />
+                <FileUp className="w-12 h-12 text-[#ffcaca] mb-4" />
                 <p className="text-[#CAE9FF] text-lg font-medium mb-2">
                   Arrastra tu archivo Excel aquí
                 </p>
@@ -57,24 +58,7 @@ function App() {
             )}
           </div>
         </div>
-
-        {xmlContent && (
-          <div className="bg-[#1B4965]/20 rounded-lg p-4 border border-[#CAE9FF]/30">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-[#CAE9FF] font-medium">XML Generado</h3>
-              <button
-                onClick={handleDownload}
-                className="flex items-center gap-2 bg-[#1B4965] text-[#CAE9FF] px-4 py-2 rounded-md hover:bg-[#1B4965]/80 transition-colors"
-              >
-                <Download className="w-4 h-4" />
-                Descargar XML
-              </button>
-            </div>
-            <pre className="bg-[#1B4965]/40 p-4 rounded-md overflow-x-auto text-[#CAE9FF] text-sm">
-              {xmlContent}
-            </pre>
-          </div>
-        )}
+        <XmlContent xmlContent={xmlContent} handleDownload={handleDownload} />
       </div>
     </div>
   );

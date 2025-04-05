@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generateXML > genera XML válido con un booking básico 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<argo:snx xmlns:argo="http://www.navis.com/argo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.navis.com/argo snx.xsd">
+  <booking nbr="250680531" line="MAE" pol="PEPIO" pol-name="Peru" pod-1="PABLB" pod-1-name="Panama" eq-status="FCL" pod-optional="PABLB" shipper-id="20604583552" shipper-name="NECOVEX S.A.C." origin="0" destination="0" client-ref-no="0" stow-block="0" stuffing-location="0" ood="N" override-cutoff="N" hold-partials="N" prevent-type-subst="N" empty-pickup-location="0" full-return-location="0" category="EXPORT" notes="0" created-by="c.ortiz" created-date="2025-04-02T16:06:41" modified-by="c.ortiz" modified-date="2025-04-02T16:11:25" quantity="1">
+    <carrier id="2024-576" facility="PDP" mode="VESSEL" />
+    <items>
+      <item qty="1" eq-size="NOM40" eq-iso-group="RE" eq-height="NOM96" eq-iso-group-description="Refrigerated container" equipment-type="45R1" equip-type-description="40ft hi-cube reefer" seq-nbr="0" tally-limit="1" eq-material="UNKNOWN" eq-grade="COT" gross-weight="24660" commodity-id="GRAPES" commodity-name="Grapes" receive-limit="1" remarks="0" created-by="c.ortiz" created-date="2025-04-02T16:10:02">
+        <hazards />
+        <reefer temp-reqd-c="-0.7" humidity-pct="0" vent-required-value="0" vent-required-unit="PERCENTAGE" co2-pct="0" o2-pct="0" />
+        <oog is-oog="N" oog-back-cm="0" oog-front-cm="0" oog-left-cm="0" oog-right-cm="0" oog-top-cm="0" />
+      </item>
+    </items>
+    <hazards />
+  </booking>
+</argo:snx>"
+`;
