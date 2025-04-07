@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import * as XLSX from "xlsx";
-import { BookingExcel } from "../types";
+import { Booking, BookingExcel } from "../types";
 import { downloadXML, generateXML } from "../utils";
 
 export const useProcessFile = () => {
@@ -14,15 +14,79 @@ export const useProcessFile = () => {
     setXmlContent(null);
 
     try {
+      const headers: string[] = [
+        "nbr",
+        "line",
+        "pol",
+        "ppol_name",
+        "pod_1",
+        "pod_1_name",
+        "eq_status",
+        "pod_optional",
+        "shipper_id",
+        "shipper_name",
+        "origin",
+        "destination",
+        "client_ref_no",
+        "stow_block",
+        "stuffing_location",
+        "ood",
+        "override_cutoff",
+        "hold_partials",
+        "prevent_type_subst",
+        "empty_pickup_location",
+        "full_return_location",
+        "category",
+        "notes",
+        "created_by",
+        "created_date",
+        "modified_by",
+        "modified_date",
+        "quantity",
+        "carrier_id",
+        "carrier_facility",
+        "carrier_mode",
+        "item_qty",
+        "item_eq_size",
+        "item_eq_iso_group",
+        "item_eq_height",
+        "item_eq_iso_group_description",
+        "item_equipment_type",
+        "item_equip_type_description",
+        "item_seq_nbr",
+        "item_tally_limit",
+        "item_eq_material",
+        "item_eq_grade",
+        "item_gross_weight",
+        "item_commodity_id",
+        "item_commodity_name",
+        "item_receive_limit",
+        "item_remarks",
+        "item_created_by",
+        "item_created_date",
+        "reefer_temp_reqd_c",
+        "reefer_humidity_pct",
+        "reefer_vent_required_value",
+        "reefer_vent_required_unit",
+        "reefer_co2_pct",
+        "reefer_o2_pct",
+        "oog_is_oog",
+        "oog_oog_back_cm",
+        "oog_oog_front_cm",
+        "oog_oog_left_cm",
+        "oog_oog_right_cm",
+      ];
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data);
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const jsonData = XLSX.utils.sheet_to_json<BookingExcel>(worksheet, {
+        header: headers,
         raw: false,
+        range: 1,
       });
 
       if (jsonData.length > 0) {
-        const bookings = jsonData.map((bookingJson) => {
+        const bookings: Booking[] = jsonData.map((bookingJson) => {
           return {
             nbr: bookingJson.nbr?.toString() || undefined,
             line: bookingJson.line?.toString() || undefined,
