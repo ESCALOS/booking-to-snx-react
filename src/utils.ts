@@ -1,11 +1,4 @@
-import {
-  Booking,
-  CarrierXml,
-  ItemXml,
-  OogXml,
-  ReeferXml,
-  BookingXml,
-} from "./types";
+import { Booking, Carrier, Item, Reefer, BookingXml } from "./types";
 
 export function generateXML(bookings: Booking[]): string {
   const escapeXml = (value: string) =>
@@ -19,7 +12,7 @@ export function generateXML(bookings: Booking[]): string {
   const toKebab = (str: string) => str.replace(/_/g, "-");
 
   const createAttributes = (
-    obj: BookingXml | CarrierXml | ItemXml | ReeferXml | OogXml
+    obj: BookingXml | Carrier | Item | Reefer
   ): string =>
     Object.entries(obj || {})
       .filter(([, value]) => value !== undefined && value !== null)
