@@ -33,10 +33,11 @@ export function generateXML(bookings: Booking[]): string {
       eq_status: booking.eq_status,
       pod_optional: booking.pod_optional,
       shipper_id: booking.shipper_id,
-      quantity: booking.quantity ?? "1",
     });
 
-    xml.push(`  <booking ${bookingAttrs}>`);
+    xml.push(
+      `  <booking ${bookingAttrs} prevent-type-subst="N" category="EXPORT">`
+    );
 
     if (booking.carrier) {
       const carrierAttrs = createAttributes(booking.carrier);
