@@ -22,8 +22,8 @@ export const useProcessFile = () => {
         "eq_status",
         "pod_optional",
         "shipper_id",
-        "quantity",
         "carrier_id",
+        "item_qty",
         "item_equipment_type",
         "item_eq_grade",
         "item_gross_weight",
@@ -35,6 +35,7 @@ export const useProcessFile = () => {
         "reefer_co2_pct",
         "reefer_o2_pct",
       ];
+
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data);
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -45,42 +46,52 @@ export const useProcessFile = () => {
       });
 
       if (jsonData.length > 0) {
-        const bookings: Booking[] = jsonData.map((bookingJson) => {
-          return {
-            nbr: bookingJson.nbr || undefined,
-            line: bookingJson.line || undefined,
-            pol: bookingJson.pol || undefined,
-            pod_1: bookingJson.pod_1 || undefined,
-            eq_status: bookingJson.eq_status || undefined,
-            pod_optional: bookingJson.pod_optional || undefined,
-            shipper_id: bookingJson.shipper_id || undefined,
-            quantity: bookingJson.quantity || undefined,
-            carrier: {
-              id: bookingJson.carrier_id || undefined,
+        const bookingMap = new Map<string, Booking>();
+
+        jsonData.forEach((row) => {
+          const item = {
+            qty: row.item_qty || undefined,
+            equipment_type: row.item_equipment_type || undefined,
+            tally_limit: row.item_qty || undefined,
+            eq_grade: row.item_eq_grade || undefined,
+            gross_weight: row.item_gross_weight || undefined,
+            commodity_id: row.item_commodity_id || undefined,
+            receive_limit: row.item_qty || undefined,
+            reefer: {
+              temp_reqd_c: row.reefer_temp_reqd_c || undefined,
+              humidity_pct: row.reefer_humidity_pct || undefined,
+              vent_required_value: row.reefer_vent_required_value || undefined,
+              vent_required_unit: row.reefer_vent_required_unit || undefined,
+              co2_pct: row.reefer_co2_pct || undefined,
+              o2_pct: row.reefer_o2_pct || undefined,
             },
-            items: [
-              {
-                qty: bookingJson.quantity || undefined,
-                equipment_type: bookingJson.item_equipment_type || undefined,
-                tally_limit: bookingJson.quantity || undefined,
-                eq_grade: bookingJson.item_eq_grade || undefined,
-                gross_weight: bookingJson.item_gross_weight || undefined,
-                commodity_id: bookingJson.item_commodity_id || undefined,
-                receive_limit: bookingJson.quantity || undefined,
-                reefer: {
-                  temp_reqd_c: bookingJson.reefer_temp_reqd_c || undefined,
-                  humidity_pct: bookingJson.reefer_humidity_pct || undefined,
-                  vent_required_value:
-                    bookingJson.reefer_vent_required_value || undefined,
-                  vent_required_unit:
-                    bookingJson.reefer_vent_required_unit || undefined,
-                  co2_pct: bookingJson.reefer_co2_pct || undefined,
-                  o2_pct: bookingJson.reefer_o2_pct || undefined,
-                },
-              },
-            ],
           };
+
+          const existingBooking = bookingMap.get(row.nbr || "");
+
+          if (existingBooking) {
+            existingBooking.items?.push(item);
+          } else {
+            const newBooking: Booking = {
+              nbr: row.nbr || undefined,
+              line: row.line || undefined,
+              pol: row.pol || undefined,
+              pod_1: row.pod_1 || undefined,
+              eq_status: row.eq_status || undefined,
+              pod_optional: row.pod_optional || undefined,
+              shipper_id: row.shipper_id || undefined,
+              carrier: {
+                id: row.carrier_id || undefined,
+              },
+              items: [item],
+            };
+            bookingMap.set(row.nbr || "", newBooking);
+          }
         });
+
+        const bookings = Array.from(bookingMap.values());
+
+        console.log(bookings);
 
         const xml = generateXML(bookings);
         setXmlContent(xml);

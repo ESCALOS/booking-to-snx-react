@@ -53,7 +53,6 @@ export interface Booking {
   eq_status?: string; // Estado del contenedor
   pod_optional?: string; // Puerto final
   shipper_id?: string; // RUC Shipper
-  quantity?: string; // Cantidad
   carrier?: Carrier; // Empresa
   items?: Item[]; // Contenedores
 }
@@ -67,8 +66,8 @@ export interface BookingExcel {
   eq_status?: string; // Estado del contenedor
   pod_optional?: string; // Puerto final
   shipper_id?: string; // RUC Shipper
-  quantity?: string; // Cantidad
   carrier_id?: string; // Número de manifiesto
+  item_qty?: string; // Cantidad
   item_equipment_type?: string; // Iso de contenedor
   item_eq_grade?: string; // Tecnología del contenedor
   item_gross_weight?: string; // Peso bruto
@@ -89,7 +88,6 @@ export interface BookingXml {
   eq_status?: string; // Estado del contenedor
   pod_optional?: string; // Puerto final
   shipper_id?: string; // RUC Shipper
-  quantity?: string; // Cantidad
   carrier_id?: string; // Número de manifiesto
   item_qty?: string; // Igual a la cantidad
   equipment_type?: string; // Iso de contenedor
