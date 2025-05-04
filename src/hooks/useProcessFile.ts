@@ -39,7 +39,6 @@ export const useProcessFile = () => {
           parsedData = parseUnitSheet(worksheet);
           break;
       }
-      console.log(parsedData);
       const xml = generateXML({
         model: parsedData,
         selectedTemplate,

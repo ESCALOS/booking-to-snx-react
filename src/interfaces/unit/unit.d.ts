@@ -1,10 +1,10 @@
-import { Oog } from "interfaces/oog";
 import { Equipment } from "./equipment";
 import { Seals } from "./seals";
 import { UnitEtc } from "./unitEtc";
 import { UfvFlex } from "./ufvFlex";
 import { UnitFlex } from "./unitFlex";
 import { Reefer } from "interfaces/reefer";
+import { Position } from "./position";
 
 export interface Unit {
   id?: string; // Número de manifiesto
@@ -21,7 +21,7 @@ export interface Unit {
   is_verified_yard_pos?: string;
   is_stowplan_posted?: string;
   equipment?: Equipment;
-  oog?: Oog;
+  position?: Position;
   seals?: Seals;
   reefer?: Reefer;
   unit_etc?: UnitEtc;
