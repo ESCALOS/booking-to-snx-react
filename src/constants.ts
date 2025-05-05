@@ -36,14 +36,13 @@ const blExcelExample: BlExcel = {
   line: undefined,
   shipper_id: undefined,
   consignee_id: undefined,
-  bl_is_ib_to_ob_move_direct: undefined,
+
   item_nbr: undefined,
   item_is_bulk: undefined,
-  item_piece_is_bulk: undefined,
   item_quantity: undefined,
   item_commodity_id: undefined,
   item_weight_total_kg: undefined,
-  item_bl_item_is_ib_to_ob_move_direct: undefined,
+
   goods_unit_id: undefined,
 };
 

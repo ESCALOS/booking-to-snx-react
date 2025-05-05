@@ -16,15 +16,11 @@ export function parseBlSheet(worksheet: XLSX.WorkSheet): BillOfLading[] {
     const item: Item = {
       nbr: row.item_nbr || undefined,
       is_bulk: row.item_is_bulk || undefined,
-      piece_is_bulk: row.item_piece_is_bulk || undefined,
+      piece_is_bulk: "N",
       quantity: row.item_quantity || undefined,
       commodity_id: row.item_commodity_id || undefined,
       weight_total_kg: row.item_weight_total_kg || undefined,
       bl_item_is_ib_to_ob_move_direct: "N",
-    };
-
-    const goods_bl = {
-      unit_id: row.goods_unit_id || undefined,
     };
 
     const existingBl = blMap.get(row.nbr || "");
@@ -41,9 +37,13 @@ export function parseBlSheet(worksheet: XLSX.WorkSheet): BillOfLading[] {
         shipper_id: row.shipper_id || undefined,
         consignee_id: row.consignee_id || undefined,
         carrier_visit: row.carrier_visit || undefined,
-        bl_is_ib_to_ob_move_direct: row.bl_is_ib_to_ob_move_direct || undefined,
-        items: [item],
-        goods_bl,
+        bl_is_ib_to_ob_move_direct: "N",
+        items: row.item_commodity_id ? [item] : undefined,
+        goods_bl: row.goods_unit_id
+          ? {
+              unit_id: row.goods_unit_id,
+            }
+          : undefined,
       };
       blMap.set(nbr, bl);
     }
