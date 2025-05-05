@@ -51,6 +51,15 @@ export const unitToXml = (unit: Unit): XmlInput => ({
 });
 
 export const billOfLadingXml = (bill_of_lading: BillOfLading): XmlInput => ({
+  nbr: bill_of_lading.nbr,
+  type: bill_of_lading.type,
+  original_bl_nbr: bill_of_lading.original_bl_nbr,
+  category: bill_of_lading.category,
+  line: bill_of_lading.line,
+  shipper_id: bill_of_lading.shipper_id,
+  consignee_id: bill_of_lading.consignee_id,
+  carrier_visit: bill_of_lading.carrier_visit,
+  bl_is_ib_to_ob_move_direct: bill_of_lading.bl_is_ib_to_ob_move_direct,
   items: bill_of_lading.items?.map((item) => ({
     ...item,
   })),

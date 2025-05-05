@@ -19,10 +19,8 @@ export function parseBlSheet(worksheet: XLSX.WorkSheet): BillOfLading[] {
       piece_is_bulk: row.item_piece_is_bulk || undefined,
       quantity: row.item_quantity || undefined,
       commodity_id: row.item_commodity_id || undefined,
-      package_weight_kg: row.item_package_weight_kg || undefined,
       weight_total_kg: row.item_weight_total_kg || undefined,
-      bl_item_is_ib_to_ob_move_direct:
-        row.item_bl_item_is_ib_to_ob_move_direct || undefined,
+      bl_item_is_ib_to_ob_move_direct: "N",
     };
 
     const goods_bl = {
@@ -35,14 +33,14 @@ export function parseBlSheet(worksheet: XLSX.WorkSheet): BillOfLading[] {
       existingBl.items?.push(item);
     } else {
       const bl: BillOfLading = {
-        nbr,
+        nbr: row.nbr || undefined,
+        type: row.original_bl_nbr ? "HOUSE" : "MASTER",
+        original_bl_nbr: row.original_bl_nbr || undefined,
         category: row.category || undefined,
         line: row.line || undefined,
         shipper_id: row.shipper_id || undefined,
         consignee_id: row.consignee_id || undefined,
         carrier_visit: row.carrier_visit || undefined,
-        released_quantity: row.released_quantity || undefined,
-        entered_quantity: row.entered_quantity || undefined,
         bl_is_ib_to_ob_move_direct: row.bl_is_ib_to_ob_move_direct || undefined,
         items: [item],
         goods_bl,

@@ -1,12 +1,12 @@
 export interface BlExcel {
-  nbr?: string; // Booking
+  carrier_visit?: string; // Visit Vessel
+  nbr?: string; // Número de bill of lading
+  type?: string; // Tipo de bill of lading
+  original_bl_nbr?: string; // Número de bill of lading padre
   category?: string; // Categoría
   line?: string; // Línea naviera
   shipper_id?: string; // RUC Shipper
   consignee_id?: string; // Número de manifiesto
-  carrier_visit?: string; // Fecha de visita
-  released_quantity?: string; // Cantidad total
-  entered_quantity?: string; // Cantidad total
   bl_is_ib_to_ob_move_direct?: string; // N por defecto
 
   // Ítem (contenedor)
@@ -15,7 +15,6 @@ export interface BlExcel {
   item_piece_is_bulk?: string; // Si es bulk
   item_quantity?: string; // Cantidad
   item_commodity_id?: string; // Código de producto
-  item_package_weight_kg?: string; // Peso bruto
   item_weight_total_kg?: string; // Peso total
   item_bl_item_is_ib_to_ob_move_direct?: string; // N por defecto
 
