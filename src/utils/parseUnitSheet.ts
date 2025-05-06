@@ -105,10 +105,24 @@ function generateCarriers(isExport: boolean, carrierId?: string): Carrier[] {
   return [
     {
       direction: "IB",
+      qualifier: "DECLARED",
+      facility: "PDP",
+      mode: isExport ? "UNKNOWN" : "VESSEL",
+      id: isExport ? undefined : carrierId,
+    },
+    {
+      direction: "IB",
       qualifier: "ACTUAL",
       facility: "PDP",
       mode: isExport ? "UNKNOWN" : "VESSEL",
       id: isExport ? undefined : carrierId,
+    },
+    {
+      direction: "OB",
+      qualifier: "DECLARED",
+      facility: "PDP",
+      mode: isExport ? "VESSEL" : "UNKNOWN",
+      id: isExport ? carrierId : undefined,
     },
     {
       direction: "OB",
