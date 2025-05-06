@@ -39,10 +39,7 @@ export function generateXML<K extends TemplateValue>(params: {
   ];
 
   for (const item of model) {
-    const converted = convert(item);
-    console.log("CONVERTED UNIT", JSON.stringify(converted, null, 2));
-
-    xml.push(objectToXmlTag(tag, converted));
+    xml.push(objectToXmlTag(tag, convert(item)));
   }
 
   xml.push(`</argo:snx>`);
