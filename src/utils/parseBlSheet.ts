@@ -1,12 +1,38 @@
-import { BillOfLading, BlExcel, Item } from "interfaces/billOfLafing";
-import { blHeaders } from "constants";
+import { blHeaders, goodsBlHeaders } from "constants";
+import { BillOfLading, BlExcel, GoodsBl, Item } from "interfaces/billOfLafing";
+import { GoodsBlExcel } from "interfaces/billOfLafing/goodsBlExcel";
 import * as XLSX from "xlsx";
 
-export function parseBlSheet(worksheet: XLSX.WorkSheet): BillOfLading[] {
+export function parseBlSheet(workbook: XLSX.WorkBook): BillOfLading[] {
+  const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+  const worksheetGoods = workbook.Sheets[workbook.SheetNames[1]];
+
   const rows = XLSX.utils.sheet_to_json<BlExcel>(worksheet, {
     header: blHeaders,
     raw: false,
     range: 1,
+  });
+
+  const rowsGoods = XLSX.utils.sheet_to_json<GoodsBlExcel>(worksheetGoods, {
+    header: goodsBlHeaders,
+    raw: false,
+    range: 1,
+  });
+
+  // Mapear los goods_bl por bl_nbr
+  const goodsMap = new Map<string, GoodsBl[]>();
+
+  rowsGoods.forEach((row) => {
+    const blNbr = row.bl_nbr || ""; // Asumiendo que 'bl_nbr' es la propiedad que se utiliza en worksheetGoods
+    const unit: GoodsBl = {
+      unit_id: row.unit_id || "",
+    };
+
+    if (goodsMap.has(blNbr)) {
+      goodsMap.get(blNbr)?.push(unit);
+    } else {
+      goodsMap.set(blNbr, [unit]);
+    }
   });
 
   const blMap = new Map<string, BillOfLading>();
@@ -25,6 +51,7 @@ export function parseBlSheet(worksheet: XLSX.WorkSheet): BillOfLading[] {
 
     const existingBl = blMap.get(row.nbr || "");
 
+    // Agregar items al Bill of Lading existente
     if (existingBl) {
       existingBl.items?.push(item);
     } else {
@@ -39,11 +66,7 @@ export function parseBlSheet(worksheet: XLSX.WorkSheet): BillOfLading[] {
         carrier_visit: row.carrier_visit || undefined,
         bl_is_ib_to_ob_move_direct: "N",
         items: row.item_commodity_id ? [item] : undefined,
-        goods_bl: row.goods_unit_id
-          ? {
-              unit_id: row.goods_unit_id,
-            }
-          : undefined,
+        goods_bl: goodsMap.get(nbr) || [], // Asignar goods_bl a partir del mapa
       };
       blMap.set(nbr, bl);
     }

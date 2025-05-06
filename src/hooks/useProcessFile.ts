@@ -24,19 +24,18 @@ export const useProcessFile = () => {
     try {
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data);
-      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 
       let parsedData: Booking[] | BillOfLading[] | Unit[] = [];
 
       switch (selectedTemplate) {
         case "BK":
-          parsedData = parseBookingSheet(worksheet);
+          parsedData = parseBookingSheet(workbook);
           break;
         case "BL":
-          parsedData = parseBlSheet(worksheet);
+          parsedData = parseBlSheet(workbook);
           break;
         case "U":
-          parsedData = parseUnitSheet(worksheet);
+          parsedData = parseUnitSheet(workbook);
           break;
       }
       const xml = generateXML({

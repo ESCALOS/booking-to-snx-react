@@ -12,5 +12,5 @@ export interface BillOfLading {
   carrier_visit?: string; // Fecha de visita
   bl_is_ib_to_ob_move_direct?: string; // N por defecto
   items?: Item[]; // Contenedores
-  goods_bl?: GoodsBl; // Contenedores
+  goods_bl?: GoodsBl[]; // Contenedores
 }

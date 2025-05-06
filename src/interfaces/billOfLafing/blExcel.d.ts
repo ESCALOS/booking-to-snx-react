@@ -14,7 +14,4 @@ export interface BlExcel {
   item_quantity?: string; // Cantidad
   item_commodity_id?: string; // Código de producto
   item_weight_total_kg?: string; // Peso total
-
-  // Goods BL
-  goods_unit_id?: string; // Número de manifiesto
 }

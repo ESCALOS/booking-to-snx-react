@@ -3,7 +3,8 @@ import { Unit, UnitExcel } from "interfaces/unit";
 import { unitHeaders } from "constants";
 import { Carrier } from "interfaces/unit/carrier";
 
-export function parseUnitSheet(worksheet: XLSX.Sheet): Unit[] {
+export function parseUnitSheet(workbook: XLSX.WorkBook): Unit[] {
+  const worksheet = workbook.Sheets[workbook.SheetNames[0]];
   const jsonData = XLSX.utils.sheet_to_json<UnitExcel>(worksheet, {
     header: unitHeaders,
     raw: false,
@@ -30,12 +31,14 @@ export function parseUnitSheet(worksheet: XLSX.Sheet): Unit[] {
       life_cycle_state: "ACT",
       role: "PRIMARY",
     },
-    position: {
-      loc_type: "YARD",
-      location: "PDP",
-      slot: row.position_slot || undefined,
-      orientation: "Y",
-    },
+    position: row.position_slot
+      ? {
+          loc_type: "YARD",
+          location: "PDP",
+          slot: row.position_slot || undefined,
+          orientation: "Y",
+        }
+      : undefined,
     routing: {
       pol: row.routing_pol || undefined,
       pod_1: row.routing_pod_1 || undefined,

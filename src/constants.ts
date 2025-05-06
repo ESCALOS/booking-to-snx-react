@@ -42,11 +42,11 @@ const blExcelExample: BlExcel = {
   item_quantity: undefined,
   item_commodity_id: undefined,
   item_weight_total_kg: undefined,
-
-  goods_unit_id: undefined,
 };
 
 export const blHeaders = Object.keys(blExcelExample);
+
+export const goodsBlHeaders = ["bl_nbr", "unit_id"];
 
 const unitExcelExample: UnitExcel = {
   visit_vessel_id: undefined,
