@@ -1,4 +1,5 @@
 type XmlValue = string | number | boolean | undefined | null;
+
 export interface XmlInput {
   [key: string]: XmlValue | XmlInput | XmlInput[];
 }
@@ -31,11 +32,21 @@ export function objectToXmlTag(
   for (const [key, value] of Object.entries(obj)) {
     if (Array.isArray(value)) {
       const tag = toKebab(key);
-      children.push(`<${tag}>`);
-      for (const item of value) {
-        children.push(objectToXmlTag("item", item as XmlInput, options));
+
+      if (tag.endsWith("s")) {
+        // Si el tag es plural, se envuelve con el tag padre
+        children.push(`<${tag}>`);
+        for (const item of value) {
+          const singularTag = tag.slice(0, -1); // Quita la 's'
+          children.push(objectToXmlTag(singularTag, item as XmlInput, options));
+        }
+        children.push(`</${tag}>`);
+      } else {
+        // Si es singular, no se envuelve, solo los hijos directos
+        for (const item of value) {
+          children.push(objectToXmlTag(tag, item as XmlInput, options));
+        }
       }
-      children.push(`</${tag}>`);
     } else if (typeof value === "object" && value !== null) {
       children.push(objectToXmlTag(toKebab(key), value as XmlInput, options));
     } else {

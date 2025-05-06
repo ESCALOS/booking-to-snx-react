@@ -43,6 +43,7 @@ export const useProcessFile = () => {
         model: parsedData,
         selectedTemplate,
       });
+      console.log(parsedData);
 
       setXmlContent(xml);
     } catch (error) {

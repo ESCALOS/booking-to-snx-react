@@ -5,6 +5,7 @@ import { UfvFlex } from "./ufvFlex";
 import { UnitFlex } from "./unitFlex";
 import { Reefer } from "interfaces/reefer";
 import { Position } from "./position";
+import { Routing } from "./routing";
 
 export interface Unit {
   id?: string; // Número de manifiesto
@@ -22,6 +23,7 @@ export interface Unit {
   is_stowplan_posted?: string;
   equipment?: Equipment;
   position?: Position;
+  routing?: Routing;
   seals?: Seals;
   reefer?: Reefer;
   unit_etc?: UnitEtc;

@@ -1,6 +1,7 @@
 import * as XLSX from "xlsx";
 import { Unit, UnitExcel } from "interfaces/unit";
 import { unitHeaders } from "constants";
+import { Carrier } from "interfaces/unit/carrier";
 
 export function parseUnitSheet(worksheet: XLSX.Sheet): Unit[] {
   const jsonData = XLSX.utils.sheet_to_json<UnitExcel>(worksheet, {
@@ -34,6 +35,16 @@ export function parseUnitSheet(worksheet: XLSX.Sheet): Unit[] {
       location: "PDP",
       slot: row.position_slot || undefined,
       orientation: "Y",
+    },
+    routing: {
+      pol: row.routing_pol || undefined,
+      pod_1: row.routing_pod_1 || undefined,
+      carrier: row.category
+        ? generateCarriers(
+            row.category.toUpperCase().trim() === "EXPORT",
+            row.visit_vessel_id || undefined
+          )
+        : undefined,
     },
     seals: {
       seal_1: row.seals_seal_1 || undefined,
@@ -88,4 +99,23 @@ export function parseUnitSheet(worksheet: XLSX.Sheet): Unit[] {
   }));
 
   return units;
+}
+
+function generateCarriers(isExport: boolean, carrierId?: string): Carrier[] {
+  return [
+    {
+      direction: "IB",
+      qualifier: "ACTUAL",
+      facility: "PDP",
+      mode: isExport ? "UNKNOWN" : "VESSEL",
+      id: isExport ? undefined : carrierId,
+    },
+    {
+      direction: "OB",
+      qualifier: "ACTUAL",
+      facility: "PDP",
+      mode: isExport ? "VESSEL" : "UNKNOWN",
+      id: isExport ? carrierId : undefined,
+    },
+  ];
 }

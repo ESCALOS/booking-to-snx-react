@@ -49,6 +49,9 @@ const blExcelExample: BlExcel = {
 export const blHeaders = Object.keys(blExcelExample);
 
 const unitExcelExample: UnitExcel = {
+  visit_vessel_id: undefined,
+  routing_pod_1: undefined,
+  routing_pol: undefined,
   id: undefined,
   category: undefined,
   transit_state: undefined,

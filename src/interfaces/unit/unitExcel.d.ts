@@ -1,4 +1,8 @@
 export interface UnitExcel {
+  visit_vessel_id?: string;
+  routing_pod_1?: string;
+  routing_pol?: string;
+
   id?: string; // Número de manifiesto
   category?: string; // Categoría
   transit_state?: string; // Estado de tránsito

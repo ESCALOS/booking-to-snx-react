@@ -1,6 +1,6 @@
 import { Booking } from "interfaces/booking";
 import { XmlInput } from "./objectToXmlTag";
-import { Equipment, Unit } from "interfaces/unit";
+import { Unit } from "interfaces/unit";
 import { BillOfLading } from "interfaces/billOfLafing";
 
 export const bookingToXml = (booking: Booking): XmlInput => ({
@@ -45,6 +45,17 @@ export const unitToXml = (unit: Unit): XmlInput => ({
   equipment: unit.equipment ? { ...unit.equipment } : undefined,
   position: unit.position ? { ...unit.position } : undefined,
   seals: unit.seals ? { ...unit.seals } : undefined,
+  routing: {
+    pol: unit.routing?.pol,
+    pod_1: unit.routing?.pod_1,
+    carrier: unit.routing?.carrier?.map((carrier) => ({
+      id: carrier.id,
+      direction: carrier.direction,
+      qualifier: carrier.qualifier,
+      mode: carrier.mode,
+      facility: carrier.facility,
+    })),
+  },
   reefer: unit.reefer ? { ...unit.reefer } : undefined,
   unit_etc: unit.unit_etc ? { ...unit.unit_etc } : undefined,
   ufv_flex: unit.ufv_flex ? { ...unit.ufv_flex } : undefined,
@@ -66,13 +77,4 @@ export const billOfLadingXml = (bill_of_lading: BillOfLading): XmlInput => ({
   goods_bl: bill_of_lading.goods_bl
     ? { ...bill_of_lading.goods_bl }
     : undefined,
-});
-
-export const unitEquipmentToXml = (equipment: Equipment): XmlInput => ({
-  eqid: equipment.eqid,
-  type: equipment.type,
-  class: equipment.class,
-  tank_rails: equipment.tank_rails,
-  life_cycle_state: equipment.life_cycle_state,
-  role: equipment.role,
 });
