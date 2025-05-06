@@ -74,7 +74,7 @@ export const billOfLadingXml = (bill_of_lading: BillOfLading): XmlInput => ({
   items: bill_of_lading.items?.map((item) => ({
     ...item,
   })),
-  goods_bl: bill_of_lading.goods_bl
-    ? { ...bill_of_lading.goods_bl }
-    : undefined,
+  goods_bl: bill_of_lading.goods_bl?.map((goods_bl) => ({
+    ...goods_bl,
+  })),
 });
