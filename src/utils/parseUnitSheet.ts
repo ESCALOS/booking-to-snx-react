@@ -2,6 +2,7 @@ import * as XLSX from "xlsx";
 import { Unit, UnitExcel } from "interfaces/unit";
 import { unitHeaders } from "constants";
 import { Carrier } from "interfaces/unit/carrier";
+import { parseExcelDate } from "./transformDateFormat";
 
 export function parseUnitSheet(workbook: XLSX.WorkBook): Unit[] {
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -30,6 +31,13 @@ export function parseUnitSheet(workbook: XLSX.WorkBook): Unit[] {
       tank_rails: "UNKNOWN",
       life_cycle_state: "ACT",
       role: "PRIMARY",
+      physical: {
+        build_date: parseExcelDate(row.physical_build_date)
+      },
+      ownership: {
+        owner: row.line,
+        operator: row.line,
+      }
     },
     position: row.position_slot
       ? {

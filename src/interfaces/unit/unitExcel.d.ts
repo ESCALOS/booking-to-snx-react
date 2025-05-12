@@ -14,6 +14,7 @@ export interface UnitExcel {
 
   // Equipment
   equipment_type?: string; // Tipo de equipo
+  physical_build_date?: string
 
   // Position
   position_slot?: string; // Ranura

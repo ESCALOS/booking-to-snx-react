@@ -1,3 +1,6 @@
+import { Ownership } from "./ownership";
+import { Physical } from "./physical";
+
 export interface Equipment {
   eqid?: string; // Equipo
   type?: string; // Tipo de equipo
@@ -5,4 +8,6 @@ export interface Equipment {
   tank_rails?: string; // Cantidad de tanque
   life_cycle_state?: string; // Estado de vida del equipo
   role?: string; // Rol
+  physical?: Physical
+  ownership?: Ownership
 }

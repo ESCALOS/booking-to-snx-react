@@ -61,6 +61,7 @@ const unitExcelExample: UnitExcel = {
   agent1: undefined,
   agent2: undefined,
   equipment_type: undefined,
+  physical_build_date: undefined,
   position_slot: undefined,
   seals_seal_1: undefined,
   seals_seal_2: undefined,
