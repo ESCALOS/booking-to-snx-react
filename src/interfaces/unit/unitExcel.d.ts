@@ -3,7 +3,9 @@ export interface UnitExcel {
   routing_pod_1?: string;
   routing_pol?: string;
 
-  id?: string; // Número de manifiesto
+  booking_id?: string;
+
+  id?: string; // Número de contenedor
   category?: string; // Categoría
   transit_state?: string; // Estado de tránsito
   freight_kind?: string; // FCL / LCL / MTY

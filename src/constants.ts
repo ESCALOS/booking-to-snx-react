@@ -52,6 +52,7 @@ const unitExcelExample: UnitExcel = {
   visit_vessel_id: undefined,
   routing_pod_1: undefined,
   routing_pol: undefined,
+  booking_id: undefined,
   id: undefined,
   category: undefined,
   transit_state: undefined,

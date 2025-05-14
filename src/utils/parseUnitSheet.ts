@@ -107,6 +107,9 @@ export function parseUnitSheet(workbook: XLSX.WorkBook): Unit[] {
       ufv_flex_8: row.ufv_flex_8 || undefined,
       ufv_flex_9: row.ufv_flex_9 || undefined,
     },
+    booking: row.booking_id ? {
+      id: row.booking_id
+    } : undefined
   }));
 
   return units;

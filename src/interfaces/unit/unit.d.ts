@@ -6,6 +6,7 @@ import { UnitFlex } from "./unitFlex";
 import { Reefer } from "interfaces/reefer";
 import { Position } from "./position";
 import { Routing } from "./routing";
+import { Booking } from "./booking";
 
 export interface Unit {
   id?: string; // Número de manifiesto
@@ -29,4 +30,5 @@ export interface Unit {
   unit_etc?: UnitEtc;
   unit_flex?: UnitFlex;
   ufv_flex?: UfvFlex;
+  booking?: Booking
 }
