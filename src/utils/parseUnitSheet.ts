@@ -72,7 +72,7 @@ export function parseUnitSheet(workbook: XLSX.WorkBook): Unit[] {
       co2_pct: row.reefer_co2_pct || undefined,
       humidity_pct: row.reefer_humidity_pct || undefined,
       vent_required_value: row.reefer_vent_required_value || undefined,
-      vent_required_unit: "PERCENTAGE",
+      vent_required_unit: "CUBIC_M_HOUR",
       extended_time_monitors: "Y",
       is_power: row.reefer_is_power || undefined,
       wanted_is_power: row.reefer_wanted_is_power || undefined,
