@@ -1,31 +1,24 @@
-export interface UnitMsc {
+import { UnitBase } from './unitBase';
+
+export interface UnitMsc extends UnitBase {
   item?: string; // A
-  line?: string; // B
   stowage_position?: string; // C
   bay?: string; // D
   row?: string; // E
   tier?: string; // F
   poo?: string; // G
-  pol?: string; // H
-  pod?: string; // I
   fds?: string; // J
-  booking?: string; // K
   bl?: string; // L
-  iso?: string; // M
   size?: string; // N
   type?: string; // O
-  container?: string; // P
-  status?: string; // Q
   commodity?: string; // R
   tare_weight?: string; // S
   net_weight?: string; // T
   gross_weight?: string; // U
   vgm?: string; // V
   peso_verificado?: string; // W
-  logistics_operator?: string; // X
   shipper?: string; // Y
   shipper_ruc?: string; // Z
-  customs_agency?: string; // AA
   imo1?: string; // AB
   un1?: string; // AC
   imo2?: string; // AD
@@ -34,9 +27,6 @@ export interface UnitMsc {
   un3?: string; // AG
   imo4?: string; // AH
   un4?: string; // AI
-  temp_set?: string; // AJ
-  temp_supply?: string; // AK
-  temp_return?: string; // AL
   humidity?: string; // AM
   air_flow?: string; // AN
   oxigen?: string; // AO
@@ -46,20 +36,13 @@ export interface UnitMsc {
   owl?: string; // AS
   owr?: string; // AT
   oh?: string; // AU
-  seal1?: string; // AV
-  seal2?: string; // AW
-  seal3?: string; // AX
-  seal4?: string; // AY
-  deposito_temporal?: string; // AZ
   condition?: string; // BA
   tecnologia?: string; // BB
   terminal?: string; // BC
-  loading_vessel?: string; // BD
   ssp_gate_out?: string; // BE
   gate_out_mty_date?: string; // BF
   gate_in_full_date?: string; // BG
   gate_out_vessel?: string; // BH
-  dam?: string; // BI
   refrendo_date?: string; // BJ
   aforo_date?: string; // BK
   type_controlador?: string; // BL
@@ -75,25 +58,20 @@ export interface UnitMsc {
   pti_vencido_85_d?: string; // BV
   pti_vencido_90_d?: string; // BW
   estadia_en_terminal_dias?: string; // BX
-  discharge_vessel?: string; // BY
   discharge_date?: string; // BZ
   initial_motor_condition?: string; // CA
   initial_motor_condition_date?: string; // CB
   initial_condition_box?: string; // CC
   initial_condition_box_date?: string; // CD
-  manufacture_year?: string; // CE
   class?: string; // CF
   motor_trademark?: string; // CG
-  reefer_tecnologia?: string; // CH
   current_pti_match?: string; // CI
-  current_box_status?: string; // CJ
   depot_status?: string; // CK
   depot_zone?: string; // CL
   depot_status_pti?: string; // CM
   fecha_reparacion_pti?: string; // CN
   depot_status_box?: string; // CO
   fecha_reparacion_box?: string; // CP
-  leak_test?: string; // CQ
   fecha_precoa?: string; // CR
   preparadas_cota?: string; // CS
   fecha_precot2?: string; // CT

@@ -1,85 +1,85 @@
-export interface UnitOne {
-  item?: string;
-  line?: string;
-  poo?: string;
-  pol?: string;
-  pod?: string;
-  fds?: string;
-  booking?: string;
-  iso?: string;
-  size?: string;
-  type?: string;
-  container?: string;
-  status?: string;
-  commodity?: string;
-  tare_weight?: string;
-  net_weight?: string;
-  gross_weight?: string;
-  vgm?: string;
-  peso_verificado?: string;
-  logistics_operator?: string;
-  shipper?: string;
-  shipper_ruc?: string;
-  customs_agency?: string;
-  temp_set?: string;
-  temp_supply?: string;
-  temp_return?: string;
-  seal1?: string;
-  seal2?: string;
-  seal3?: string;
-  seal4?: string;
-  dt?: string;
-  condition?: string;
-  tecnologia?: string;
-  terminal?: string;
-  loading_vessel?: string;
-  ssp_gate_out?: string;
-  gate_out_mty_date?: string;
-  gate_in_full_date?: string;
-  gate_out_vessel?: string;
-  dam?: string;
-  refrendo_date?: string;
-  usuario?: string;
-  aforo_date?: string;
-  ingreso_callao?: string;
-  dwell_time?: string;
-  primer_pti?: string;
-  segundo_pti?: string;
-  fecha_pti?: string;
-  vigencia_pti?: string;
-  pti_vencido_60_d?: string;
-  pti_vencido_30_d?: string;
-  estadia_en_terminal?: string;
-  type_controlador?: string;
-  type_rcd?: string;
-  discharge_vessel?: string;
-  discharge_date?: string;
-  initial_motor_condition?: string;
-  initial_motor_condition_date?: string;
-  initial_condition_box?: string;
-  initial_condition_box_date?: string;
-  motor_trademark?: string;
-  manufacture_year?: string;
-  class?: string;
-  reefer_tecnologia?: string;
-  current_pti_status?: string;
-  current_box_status?: string;
-  depot_status?: string;
-  depot_zone?: string;
-  depot_status_pti?: string;
-  fecha_reparacion_pti?: string;
-  depot_status_box?: string;
-  fecha_reparacion_box?: string;
-  std?: string;
-  preparado_cot?: string;
-  fecha_pre_cot?: string;
-  vigencia_cot?: string;
-  fecha_venc_pre_cot?: string;
-  leak_test?: string;
-  fecha_leak_test?: string;
-  preparado_coa?: string;
-  doble_tecnologia?: string;
-  cnt_lavado_pdp?: string;
-  fecha_de_lavado?: string;
-  obs?: string;
+import { UnitBase } from './unitBase';
+
+export interface UnitOne extends UnitBase {
+  item?: string; // A
+  stowage_position?: string; // C
+  bay?: string; // D
+  row?: string; // E
+  tier?: string; // F
+  poo?: string; // G
+  fds?: string; // J
+  bl?: string; // L
+  size?: string; // N
+  type?: string; // O
+  commodity?: string; // R
+  tare_weight?: string; // S
+  net_weight?: string; // T
+  gross_weight?: string; // U
+  vgm?: string; // V
+  peso_verificado?: string; // W
+  shipper?: string; // Y
+  shipper_ruc?: string; // Z
+  imo1?: string; // AB
+  un1?: string; // AC
+  imo2?: string; // AD
+  un2?: string; // AE
+  imo3?: string; // AF
+  un3?: string; // AG
+  imo4?: string; // AH
+  un4?: string; // AI
+  humidity?: string; // AM
+  air_flow?: string; // AN
+  oxigen?: string; // AO
+  carbon_dioxide?: string; // AP
+  olb?: string; // AQ
+  olf?: string; // AR
+  owl?: string; // AS
+  owr?: string; // AT
+  oh?: string; // AU
+  condition?: string; // BA
+  tecnologia?: string; // BB
+  terminal?: string; // BC
+  ssp_gate_out?: string; // BE
+  gate_out_mty_date?: string; // BF
+  gate_in_full_date?: string; // BG
+  gate_out_vessel?: string; // BH
+  refrendo_date?: string; // BJ
+  usuario?: string; // BK
+  aforo_date?: string; // BL
+  ingreso_callao?: string; // BM
+  dwell_time?: string; // BN
+  primer_pti?: string; // BO
+  segundo_pti?: string; // BP
+  fecha_pti?: string; // BQ
+  vigencia_pti?: string; // BR
+  pti_vencido_60_d?: string; // BS
+  pti_vencido_30_d?: string; // BT
+  estadia_en_terminal?: string; // BU
+  type_controlador?: string; // BV
+  type_rcd?: string; // BW
+  discharge_date?: string; // BY
+  initial_motor_condition?: string; // BZ
+  initial_motor_condition_date?: string; // CA
+  initial_condition_box?: string; // CB
+  initial_condition_box_date?: string; // CC
+  motor_trademark?: string; // CD
+  class?: string; // CF
+  current_pti_status?: string; // CH
+  depot_status?: string; // CJ
+  depot_zone?: string; // CK
+  depot_status_pti?: string; // CL
+  fecha_reparacion_pti?: string; // CM
+  depot_status_box?: string; // CN
+  fecha_reparacion_box?: string; // CO
+  std?: string; // CP
+  preparado_cot?: string; // CQ
+  fecha_pre_cot?: string; // CR
+  vigencia_cot?: string; // CS
+  fecha_venc_pre_cot?: string; // CT
+  fecha_leak_test?: string; // CV
+  preparado_coa?: string; // CW
+  doble_tecnologia?: string; // CX
+  cnt_lavado_pdp?: string; // CY
+  fecha_de_lavado?: string; // CZ
+  obs?: string; // DA
 }
