@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#651b1b] to-[#d35f5f] flex items-center justify-center p-4">
-      <div className="w-full max-w-xl">
+      <div className="w-full max-w-7xl">
         <Suspense
           fallback={
             <div className="flex flex-col items-center justify-center py-10">
@@ -39,10 +39,7 @@ function App() {
             isLoading={isLoading}
             fileName={fileName}
           />
-          <XmlContent
-            xmlContent={xmlContent}
-            handleDownload={handleDownload}
-          />
+          <XmlContent xmlContent={xmlContent} handleDownload={handleDownload} />
         </Suspense>
       </div>
     </div>

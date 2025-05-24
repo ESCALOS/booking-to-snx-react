@@ -30,5 +30,5 @@ export interface Unit {
   unit_etc?: UnitEtc;
   unit_flex?: UnitFlex;
   ufv_flex?: UfvFlex;
-  booking?: Booking
+  booking?: Booking;
 }

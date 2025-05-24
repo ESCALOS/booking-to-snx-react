@@ -35,7 +35,7 @@ export const useProcessFile = () => {
           parsedData = parseBlSheet(workbook);
           break;
         case "U":
-          parsedData = parseUnitSheet(workbook);
+          parsedData = parseUnitSheet(workbook, file.name);
           break;
       }
       const xml = generateXML({

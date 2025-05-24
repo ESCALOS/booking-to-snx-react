@@ -15,8 +15,8 @@ export interface UnitExcel {
   agent2?: string; // Agente 2
 
   // Equipment
-  equipment_type?: string; // Tipo de equipo
-  physical_build_date?: string
+  equipment_type?: string; // ISO
+  physical_build_date?: string;
 
   // Position
   position_slot?: string; // Ranura
@@ -39,21 +39,21 @@ export interface UnitExcel {
   reefer_wanted_is_power?: string;
 
   // Unit Flex
-  unit_flex_3?: string;
-  unit_flex_5?: string;
-  unit_flex_8?: string;
-  unit_flex_9?: string;
-  unit_flex_14?: string;
-  unit_flex_15?: string;
+  unit_flex_3?: string; // Estado RCE
+  unit_flex_5?: string; // Estado de transmisión
+  unit_flex_8?: string; // Canal Aduanero
+  unit_flex_9?: string; // Bultos
+  unit_flex_14?: string; // IRM Numerada
+  unit_flex_15?: string; // Condicion de estructura
 
   // Ufv Flex
-  ufv_flex_1?: string;
-  ufv_flex_2?: string;
-  ufv_flex_3?: string;
-  ufv_flex_4?: string;
-  ufv_flex_5?: string;
-  ufv_flex_6?: string;
-  ufv_flex_7?: string;
-  ufv_flex_8?: string;
-  ufv_flex_9?: string;
+  ufv_flex_1?: string; // DAM
+  ufv_flex_2?: string; // Número de RCE
+  ufv_flex_3?: string; // Código de depósito
+  ufv_flex_4?: string; // Número de RM
+  ufv_flex_5?: string; // Guía de Remisión
+  ufv_flex_6?: string; // Guía de transporte
+  ufv_flex_7?: string; // Almacén simple
+  ufv_flex_8?: string; // Levante aduanero
+  ufv_flex_9?: string; // Tecnología Refeer
 }

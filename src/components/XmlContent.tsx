@@ -8,7 +8,7 @@ type Props = {
 export default function XmlContent({ handleDownload, xmlContent }: Props) {
   return (
     xmlContent && (
-      <div className="bg-[#1B4965]/20 rounded-lg p-4 border border-[#CAE9FF]/30">
+      <div className="bg-[#1B4965]/20 rounded-lg p-4 border border-[#CAE9FF]/30 max-h-96 overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-[#CAE9FF] font-medium">XML Generado</h3>
           <button
