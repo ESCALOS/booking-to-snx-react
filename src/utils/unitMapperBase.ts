@@ -15,6 +15,11 @@ export function mapUnitBase<T extends UnitBase>(row: T): Unit | null {
     row.status
   );
 
+  const tecnology = getTecnology(
+    row.reefer_tecnologia || "",
+    row.leak_test || ""
+  );
+
   return {
     id: row.container || undefined,
     category,
@@ -22,7 +27,7 @@ export function mapUnitBase<T extends UnitBase>(row: T): Unit | null {
     transit_state,
     freight_kind,
     line: row.line || undefined,
-    grade: getTecnology(row.reefer_tecnologia || "", row.leak_test || ""),
+    grade: tecnology,
     agent1: row.customs_agency || undefined,
     agent2: row.logistics_operator || undefined,
     is_ib_to_ob_move_direct: "N",
@@ -66,14 +71,16 @@ export function mapUnitBase<T extends UnitBase>(row: T): Unit | null {
       seal_3: row.seal3,
       seal_4: row.seal4,
     },
-    reefer: {
-      temp_reqd_c: row.temp_set || undefined,
-      temp_min_c: row.temp_supply,
-      temp_max_c: row.temp_return,
-      temp_display_unit: "C",
-      extended_time_monitors: "Y",
-      is_alarm_on: "N",
-    },
+    reefer: tecnology?.includes("DRY")
+      ? undefined
+      : {
+          temp_reqd_c: row.temp_set || undefined,
+          temp_min_c: row.temp_supply,
+          temp_max_c: row.temp_return,
+          temp_display_unit: "C",
+          extended_time_monitors: "Y",
+          is_alarm_on: "N",
+        },
     unit_etc: {
       category: category || undefined,
       line: row.line || undefined,
@@ -90,10 +97,7 @@ export function mapUnitBase<T extends UnitBase>(row: T): Unit | null {
     ufv_flex: {
       ufv_flex_1: row.dam || undefined,
       ufv_flex_3: row.dt || undefined,
-      ufv_flex_9: getTecnology(
-        row.reefer_tecnologia || "",
-        row.leak_test || ""
-      ),
+      ufv_flex_9: tecnology,
     },
     booking: row.booking
       ? {
