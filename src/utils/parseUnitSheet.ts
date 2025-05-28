@@ -3,6 +3,7 @@ import { Unit, UnitExcel } from "interfaces/unit";
 import {
   unitCmaHeader,
   unitHeaders,
+  unitMaeHeader,
   unitMscHeader,
   unitOneHeader,
   unitSmlHeader,
@@ -24,6 +25,7 @@ export function parseUnitSheet(
   if (name.includes("ONE")) return parseUnitOne(workbook);
   if (name.includes("CMA")) return parseUnitCma(workbook);
   if (name.includes("SEABOARD")) return parseUnitSml(workbook);
+  if (name.includes("MAERSK")) return parseUnitMae(workbook);
   // Fallback
   return parseDefaultUnit(workbook);
 }
@@ -35,7 +37,9 @@ function parseUnitOne(workbook: XLSX.WorkBook): Unit[] {
     raw: false,
     range: 2,
   });
-  return jsonData.map(mapUnitBase).filter((unit): unit is Unit => unit !== null);
+  return jsonData
+    .map(mapUnitBase)
+    .filter((unit): unit is Unit => unit !== null);
 }
 
 function parseUnitCma(workbook: XLSX.WorkBook): Unit[] {
@@ -45,7 +49,9 @@ function parseUnitCma(workbook: XLSX.WorkBook): Unit[] {
     raw: false,
     range: 2,
   });
-  return jsonData.map(mapUnitBase).filter((unit): unit is Unit => unit !== null);
+  return jsonData
+    .map(mapUnitBase)
+    .filter((unit): unit is Unit => unit !== null);
 }
 
 function parseUnitMsc(workbook: XLSX.WorkBook): Unit[] {
@@ -55,7 +61,9 @@ function parseUnitMsc(workbook: XLSX.WorkBook): Unit[] {
     raw: false,
     range: 2,
   });
-  return jsonData.map(mapUnitBase).filter((unit): unit is Unit => unit !== null);
+  return jsonData
+    .map(mapUnitBase)
+    .filter((unit): unit is Unit => unit !== null);
 }
 
 function parseUnitSml(workbook: XLSX.WorkBook): Unit[] {
@@ -65,7 +73,21 @@ function parseUnitSml(workbook: XLSX.WorkBook): Unit[] {
     raw: false,
     range: 2,
   });
-  return jsonData.map(mapUnitBase).filter((unit): unit is Unit => unit !== null);
+  return jsonData
+    .map(mapUnitBase)
+    .filter((unit): unit is Unit => unit !== null);
+}
+
+function parseUnitMae(workbook: XLSX.WorkBook): Unit[] {
+  const worksheet = workbook.Sheets["Stock Pisco"];
+  const jsonData = XLSX.utils.sheet_to_json<UnitExcel>(worksheet, {
+    header: unitMaeHeader,
+    raw: false,
+    range: 1,
+  });
+  return jsonData
+    .map(mapUnitBase)
+    .filter((unit): unit is Unit => unit !== null);
 }
 
 function parseDefaultUnit(workbook: XLSX.WorkBook): Unit[] {

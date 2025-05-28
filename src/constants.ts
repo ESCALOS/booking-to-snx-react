@@ -6,6 +6,7 @@ import { TemplateOption } from "types";
 import { UnitCma } from "interfaces/unit/byLine/unitCma";
 import { UnitMsc } from "interfaces/unit/byLine/unitMsc";
 import { UnitSml } from "interfaces/unit/byLine/unitSml";
+import { UnitMae } from "interfaces/unit/byLine/unitMae";
 
 const bookingExcelExample: BookingExcel = {
   nbr: undefined,
@@ -537,6 +538,128 @@ const unitSmlExample: UnitSml = {
   obs: undefined, // CW
 };
 export const unitSmlHeader = Object.keys(unitSmlExample);
+
+const unitMaeExample: UnitMae = {
+  item: undefined, // A
+  line: undefined, // B
+  stowage_position: undefined, // C
+  bay: undefined, // D
+  row: undefined, // E
+  tier: undefined, // F
+  poo: undefined, // G
+  pol: undefined, // H
+  pod: undefined, // I
+  fds: undefined, // J
+  booking: undefined, // K
+  bl: undefined, // L
+  iso: undefined, // M
+  size: undefined, // N
+  type: undefined, // O
+  container: undefined, // P
+  status: undefined, // Q
+  commodity: undefined, // R
+  tare_weight: undefined, // S
+  net_weight: undefined, // T
+  gross_weight: undefined, // U
+  vgm: undefined, // V
+  peso_verificado: undefined, // W
+  logistics_operator: undefined, // X
+  shipper: undefined, // Y
+  shipper_ruc: undefined, // Z
+  customs_agency: undefined, // AA
+  imo1: undefined, // AB
+  un1: undefined, // AC
+  imo2: undefined, // AD
+  un2: undefined, // AE
+  imo3: undefined, // AF
+  un3: undefined, // AG
+  imo4: undefined, // AH
+  un4: undefined, // AI
+  temp_set: undefined, // AJ
+  temp_supply: undefined, // AK
+  temp_return: undefined, // AL
+  humidity: undefined, // AM
+  air_flow: undefined, // AN
+  oxigen: undefined, // AO
+  carbon_dioxide: undefined, // AP
+  olb: undefined, // AQ
+  olf: undefined, // AR
+  owl: undefined, // AS
+  owr: undefined, // AT
+  oh: undefined, // AU
+  seal1: undefined, // AV
+  seal2: undefined, // AW
+  seal3: undefined, // AX
+  seal4: undefined, // AY
+  dt: undefined, // AZ
+  condition: undefined, // BA
+  tecnologia: undefined, // BB
+  terminal: undefined, // BC
+  loading_vessel: undefined, // BD
+  ssp_gate_out: undefined, // BE
+  gate_out_mty_date: undefined, // BF
+  gate_in_full_date: undefined, // BG
+  gate_out_vessel: undefined, // BH
+  dam: undefined, // BI
+  refrendo_date: undefined, // BJ
+  aforo_date: undefined, // BK
+  type_size: undefined, // BL
+  manufacture_year: undefined, // BM
+  payload: undefined, // BN
+  tare: undefined, // BO
+  clase: undefined, // BP
+  permanencia: undefined, // BQ
+  estado_box: undefined, // BR
+  estado_maq: undefined, // BS
+  zona: undefined, // BT
+  reefer_tecnologia: undefined, // BU
+  motor: undefined, // BV
+  iso_code: undefined, // BW
+  acondicionamiento: undefined, // BX
+  observaciones: undefined, // BY
+  ussda: undefined, // BZ
+  upgrade: undefined, // CA
+  rcd: undefined, // CB
+  operative: undefined, // CC
+  cleaning: undefined, // CD
+  damaged: undefined, // CE
+  without_pti: undefined, // CF
+  under_inspection: undefined, // CG
+  pre_asigned: undefined, // CH
+  in_hold: undefined, // CI
+  load_empty: undefined, // CJ
+  total_lost: undefined, // CK
+  sale: undefined, // CL
+  primer_pti: undefined, // CM
+  segundo_pti: undefined, // CN
+  tercer_pti: undefined, // CO
+  type_controlador: undefined, // CP
+  discharge_vessel: undefined, // CQ
+  discharge_date: undefined, // CR
+  initial_motor_condition: undefined, // CS
+  initial_motor_condition_date: undefined, // CT
+  initial_box_condition: undefined, // CU
+  initial_box_condition_date: undefined, // CV
+  current_pti_status: undefined, // CW
+  current_box_status: undefined, // CX
+  depot_status: undefined, // CY
+  depot_zone: undefined, // CZ
+  depot_status_pti: undefined, // DA
+  fecha_reparacion_pti: undefined, // DB
+  depot_status_box: undefined, // DC
+  fecha_reparacion_box: undefined, // DD
+  leak_test: undefined, // DE
+  leak_test_date: undefined, // DF
+  preparadas_cot: undefined, // DG
+  fecha_prueba_cot: undefined, // DH
+  doble_tecnologia: undefined, // DI
+  preparadas_coa: undefined, // DJ
+  fecha_preparadas_coa: undefined, // DK
+  cnt_lavados: undefined, // DL
+  fecha_lavado: undefined, // DM
+  observacion: undefined, // DN
+};
+export const unitMaeHeader = Object.keys(unitMaeExample);
 
 export const templateOptions: TemplateOption[] = [
   { value: "BK", label: "Booking" },

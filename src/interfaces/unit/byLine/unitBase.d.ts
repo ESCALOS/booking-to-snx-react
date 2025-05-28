@@ -33,7 +33,6 @@ export interface UnitBase {
   loading_vessel?: string;
   discharge_vessel?: string;
 
-  // Campos específicos por línea
   dam?: string;
-  dt?: string; // Para ONE, CMA, SML
+  dt?: string;
 }
