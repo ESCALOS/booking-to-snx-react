@@ -7,6 +7,7 @@ import { UnitCma } from "interfaces/unit/byLine/unitCma";
 import { UnitMsc } from "interfaces/unit/byLine/unitMsc";
 import { UnitSml } from "interfaces/unit/byLine/unitSml";
 import { UnitMae } from "interfaces/unit/byLine/unitMae";
+import { BookingTemplateExcel } from "interfaces/booking/bookingTemplateExcel";
 
 const bookingExcelExample: BookingExcel = {
   nbr: undefined,
@@ -31,6 +32,52 @@ const bookingExcelExample: BookingExcel = {
 };
 
 export const bookingHeaders = Object.keys(bookingExcelExample);
+
+const bookingTemplateExcelExample: BookingTemplateExcel = {
+  nro: undefined,
+  line: undefined,
+  poo: undefined,
+  pol: undefined,
+  pod: undefined,
+  fds: undefined,
+  booking: undefined,
+  iso_code: undefined,
+  size: undefined,
+  kind: undefined,
+  qty: undefined,
+  state: undefined,
+  commodity: undefined,
+  tara: undefined,
+  net_weight: undefined,
+  gross_weight: undefined,
+  vgm: undefined,
+  peso_verificado: undefined,
+  imo1: undefined,
+  un1: undefined,
+  imo2: undefined,
+  un2: undefined,
+  imo3: undefined,
+  un3: undefined,
+  imo4: undefined,
+  un4: undefined,
+  olb: undefined,
+  olf: undefined,
+  owl: undefined,
+  owr: undefined,
+  oh: undefined,
+  temperature: undefined,
+  maximum_temperature: undefined,
+  minimum_temperature: undefined,
+  humidity: undefined,
+  air_flow: undefined,
+  oxygen: undefined,
+  carbon_dioxide: undefined,
+  cliente: undefined,
+  tecnologia: undefined,
+  manifiesto: undefined,
+};
+
+export const bookingTemplateHeaders = Object.keys(bookingTemplateExcelExample);
 
 const blExcelExample: BlExcel = {
   carrier_visit: undefined,

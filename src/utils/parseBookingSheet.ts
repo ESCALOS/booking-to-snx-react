@@ -1,11 +1,12 @@
-import { Booking, BookingExcel } from "interfaces/booking";
-import { bookingHeaders } from "constants";
+import { Booking } from "interfaces/booking";
+import { bookingTemplateHeaders } from "constants";
 import * as XLSX from "xlsx";
+import { BookingTemplateExcel } from "interfaces/booking/bookingTemplateExcel";
 
 export function parseBookingSheet(workbook: XLSX.WorkBook): Booking[] {
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-  const jsonData = XLSX.utils.sheet_to_json<BookingExcel>(worksheet, {
-    header: bookingHeaders,
+  const jsonData = XLSX.utils.sheet_to_json<BookingTemplateExcel>(worksheet, {
+    header: bookingTemplateHeaders,
     raw: false,
     range: 1,
   });
@@ -13,47 +14,60 @@ export function parseBookingSheet(workbook: XLSX.WorkBook): Booking[] {
   const bookingMap = new Map<string, Booking>();
 
   jsonData.forEach((row) => {
+    const tecnology = getTecnology(row.tecnologia, row.kind);
     const item = {
-      qty: row.item_qty || undefined,
-      equipment_type: row.item_equipment_type || undefined,
-      tally_limit: row.item_qty || undefined,
-      eq_grade: row.item_eq_grade || undefined,
-      gross_weight: row.item_gross_weight || undefined,
-      commodity_id: row.item_commodity_id || undefined,
-      receive_limit: row.item_qty || undefined,
-      reefer: row.item_eq_grade?.includes("DRY")
+      qty: row.qty || undefined,
+      equipment_type: row.iso_code || undefined,
+      tally_limit: row.qty || undefined,
+      eq_grade: tecnology,
+      gross_weight: row.gross_weight || undefined,
+      commodity_id: row.commodity || undefined,
+      receive_limit: row.qty || undefined,
+      reefer: tecnology?.includes("DRY")
         ? undefined
         : {
-            temp_reqd_c: row.reefer_temp_reqd_c || undefined,
-            humidity_pct: row.reefer_humidity_pct || undefined,
-            vent_required_value: row.reefer_vent_required_value || undefined,
-            vent_required_unit: row.reefer_vent_required_unit || undefined,
-            co2_pct: row.reefer_co2_pct || undefined,
-            o2_pct: row.reefer_o2_pct || undefined,
+            temp_reqd_c: row.temperature || undefined,
           },
     };
 
-    const existingBooking = bookingMap.get(row.nbr || "");
+    const existingBooking = bookingMap.get(row.booking || "");
 
     if (existingBooking) {
       existingBooking.items?.push(item);
     } else {
       const newBooking: Booking = {
-        nbr: row.nbr || undefined,
+        nbr: row.booking || undefined,
         line: row.line || undefined,
         pol: row.pol || undefined,
-        pod_1: row.pod_1 || undefined,
-        eq_status: row.eq_status || undefined,
-        pod_optional: row.pod_optional || undefined,
-        shipper_id: row.shipper_id || undefined,
+        pod_1: row.pod || undefined,
+        eq_status: row.tecnologia || undefined,
+        pod_optional: "FCL",
+        shipper_id: row.cliente || undefined,
         carrier: {
-          id: row.carrier_id || undefined,
+          id: row.manifiesto || undefined,
         },
         items: [item],
       };
-      bookingMap.set(row.nbr || "", newBooking);
+      bookingMap.set(row.booking || "", newBooking);
     }
   });
+  console.log(`Parsed ${bookingMap.size} bookings from the sheet.`);
+  console.log(Array.from(bookingMap.values()));
 
   return Array.from(bookingMap.values());
+}
+
+function getTecnology(
+  tecnology: string | undefined,
+  kind: string | undefined
+): string | undefined {
+  if (tecnology === undefined) return undefined;
+
+  if (tecnology.toUpperCase().includes("DRY")) {
+    if (kind === "HC") {
+      return "DRY 40'";
+    }
+    return "DRY 20'";
+  }
+  return tecnology;
 }
