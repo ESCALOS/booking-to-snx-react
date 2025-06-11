@@ -1,4 +1,4 @@
-import { UnitBase } from './unitBase';
+import { UnitBase } from "./unitBase";
 
 export interface UnitMsc extends UnitBase {
   item?: string; // A
@@ -65,7 +65,6 @@ export interface UnitMsc extends UnitBase {
   initial_condition_box_date?: string; // CD
   class?: string; // CF
   motor_trademark?: string; // CG
-  current_pti_match?: string; // CI
   depot_status?: string; // CK
   depot_zone?: string; // CL
   depot_status_pti?: string; // CM
@@ -80,7 +79,7 @@ export interface UnitMsc extends UnitBase {
   pti_ca?: string; // CW
   liventus?: string; // CX
   fecha_liventus?: string; // CY
-  cnt_lavados_pdp?: string; // CZ
+
   fecha_de_lavado?: string; // DA
   doble_tecnologia?: string; // DB
   fecha_doble_tecnologia?: string; // DC

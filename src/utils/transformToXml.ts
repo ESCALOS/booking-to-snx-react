@@ -58,6 +58,7 @@ export const unitToXml = (unit: Unit): XmlInput => ({
   },
   reefer: unit.reefer ? { ...unit.reefer } : undefined,
   unit_etc: unit.unit_etc ? { ...unit.unit_etc } : undefined,
+  unit_flex: unit.unit_flex ? { ...unit.unit_flex } : undefined,
   ufv_flex: unit.ufv_flex ? { ...unit.ufv_flex } : undefined,
   booking: unit.booking ? { ...unit.booking } : undefined,
 });

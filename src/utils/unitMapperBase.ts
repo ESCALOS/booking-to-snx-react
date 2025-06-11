@@ -20,6 +20,16 @@ export function mapUnitBase<T extends UnitBase>(row: T): Unit | null {
     row.leak_test || ""
   );
 
+  const box_status = getCurrentStatus(row.current_box_status);
+  const pti_status = getCurrentStatus(row.current_pti_status);
+  const lavado_status = getLavadoStatus(row.cnt_lavado);
+  const equipmentCondition = getEquipmentCondition(
+    box_status,
+    pti_status,
+    lavado_status,
+    tecnology?.includes("DRY") || false
+  );
+
   return {
     id: row.container || undefined,
     category,
@@ -84,20 +94,20 @@ export function mapUnitBase<T extends UnitBase>(row: T): Unit | null {
     unit_etc: {
       category: category || undefined,
       line: row.line || undefined,
-      equip_condition: row.current_box_status,
+      equip_condition: equipmentCondition,
     },
     unit_flex: {
       unit_flex_1: "N",
       unit_flex_2: "127",
-      unit_flex_4: "0",
-      unit_flex_10: "SI",
       unit_flex_11: "N",
-      unit_flex_15: row.current_box_status || undefined,
+      unit_flex_13: lavado_status,
+      unit_flex_15: box_status,
     },
     ufv_flex: {
       ufv_flex_1: row.dam || undefined,
       ufv_flex_3: row.dt || undefined,
       ufv_flex_9: tecnology,
+      ufv_flex_10: pti_status,
     },
     booking: row.booking
       ? {
@@ -120,4 +130,43 @@ function getTecnology(
   if (tecnologyStr.includes("Controlada")) return "COA";
 
   return undefined;
+}
+
+function getCurrentStatus(status: string | undefined): string {
+  switch (status?.trim()) {
+    case "OK":
+    case "DD":
+      return status;
+    default:
+      return "SC"; // Sin condición
+  }
+}
+
+function getLavadoStatus(lavado: string | undefined): string {
+  if (lavado?.trim() === "SI") {
+    return "LIMPIO";
+  }
+  return "SUCIO";
+}
+
+function getEquipmentCondition(
+  box_status: string,
+  pti_status: string,
+  lavado_status: string,
+  isDry: boolean
+): string | undefined {
+  if (isDry) pti_status = "OK"; // For DRY containers, PTI status is always OK
+
+  if (box_status === "SC") return "SC"; // Sin condición de caja
+  if (pti_status === "SC") return "SC.M"; // Sin condición de motor
+  if (box_status === "OK" && pti_status === "OK") {
+    if (lavado_status === "LIMPIO") {
+      return "OK"; // Operativo Limpio
+    }
+    return "OS"; // Operativo Sucio
+  }
+  if (lavado_status === "LIMPIO") {
+    return "DD"; // Sin condición de caja, motor limpio
+  }
+  return "DS";
 }

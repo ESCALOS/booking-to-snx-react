@@ -1,4 +1,4 @@
-import { UnitBase } from './unitBase';
+import { UnitBase } from "./unitBase";
 
 export interface UnitOne extends UnitBase {
   item?: string; // A
@@ -64,7 +64,6 @@ export interface UnitOne extends UnitBase {
   initial_condition_box_date?: string; // CC
   motor_trademark?: string; // CD
   class?: string; // CF
-  current_pti_status?: string; // CH
   depot_status?: string; // CJ
   depot_zone?: string; // CK
   depot_status_pti?: string; // CL
@@ -79,7 +78,6 @@ export interface UnitOne extends UnitBase {
   fecha_leak_test?: string; // CV
   preparado_coa?: string; // CW
   doble_tecnologia?: string; // CX
-  cnt_lavado_pdp?: string; // CY
   fecha_de_lavado?: string; // CZ
   obs?: string; // DA
 }

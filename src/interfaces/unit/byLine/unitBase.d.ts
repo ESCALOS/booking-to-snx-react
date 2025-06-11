@@ -27,6 +27,7 @@ export interface UnitBase {
 
   // Campos para equipamiento
   manufacture_year?: string;
+  current_pti_status?: string;
   current_box_status?: string;
 
   // Campos para routing/vessels
@@ -35,4 +36,6 @@ export interface UnitBase {
 
   dam?: string;
   dt?: string;
+
+  cnt_lavado?: string;
 }

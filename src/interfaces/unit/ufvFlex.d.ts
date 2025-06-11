@@ -8,4 +8,5 @@ export interface UfvFlex {
   ufv_flex_7?: string; // Almacen Simple
   ufv_flex_8?: string; // S
   ufv_flex_9?: string; // tecnología
+  ufv_flex_10?: string; // Maquinaria - Condicion motor
 }

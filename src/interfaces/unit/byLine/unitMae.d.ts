@@ -80,7 +80,6 @@ export interface UnitMae extends UnitBase {
   initial_motor_condition_date?: string;
   initial_box_condition?: string;
   initial_box_condition_date?: string;
-  current_pti_status?: string;
   current_box_status?: string;
   depot_status?: string;
   depot_zone?: string;
@@ -95,7 +94,7 @@ export interface UnitMae extends UnitBase {
   doble_tecnologia?: string;
   preparadas_coa?: string;
   fecha_preparadas_coa?: string;
-  cnt_lavados?: string;
+
   fecha_lavado?: string;
   observacion?: string;
 }

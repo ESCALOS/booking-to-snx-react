@@ -1,4 +1,4 @@
-import { UnitBase } from './unitBase';
+import { UnitBase } from "./unitBase";
 
 export interface UnitSml extends UnitBase {
   item?: string; // A
@@ -64,7 +64,6 @@ export interface UnitSml extends UnitBase {
   initial_condition_box_date?: string; // CC
   motor_trademark?: string; // CD
   class?: string; // CF
-  current_pti_status?: string; // CH
   depot_status?: string; // CJ
   depot_status_pti?: string; // CK
   fecha_reparacion_pti?: string; // CL
@@ -75,7 +74,6 @@ export interface UnitSml extends UnitBase {
   fecha_leak_test?: string; // CR
   preparado_coa?: string; // CS
   doble_tecnologia?: string; // CT
-  cnt_lavado_pdp?: string; // CU
   fecha_de_lavado?: string; // CV
   obs?: string; // CW
 }

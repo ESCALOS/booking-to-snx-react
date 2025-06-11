@@ -1,4 +1,4 @@
-import { UnitBase } from './unitBase';
+import { UnitBase } from "./unitBase";
 
 export interface UnitCma extends UnitBase {
   item?: string; // A
@@ -65,7 +65,6 @@ export interface UnitCma extends UnitBase {
   motor_trademark?: string; // CD
   smart_refeer?: string; // CE
   class?: string; // CG
-  current_pti_status?: string; // CI
   depot_status?: string; // CK
   depot_zone?: string; // CL
   depot_status_pti?: string; // CM
@@ -79,7 +78,7 @@ export interface UnitCma extends UnitBase {
   preparado_coa?: string; // CV
   fecha_coa?: string; // CW
   doble_tecnologia?: string; // CX
-  cnt_lavado_pdp?: string; // CY
+
   fecha_de_lavado?: string; // CZ
   obs?: string; // DA
 }

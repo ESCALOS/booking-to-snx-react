@@ -248,7 +248,7 @@ const unitOneExample: UnitOne = {
   fecha_leak_test: undefined, // CS
   preparado_coa: undefined, // CT
   doble_tecnologia: undefined, // CU
-  cnt_lavado_pdp: undefined, // CV
+  cnt_lavado: undefined, // CV
   fecha_de_lavado: undefined, // CW
   obs: undefined, // CX
 };
@@ -358,7 +358,7 @@ const unitCmaExample: UnitCma = {
   preparado_coa: undefined, // CV
   fecha_coa: undefined, // CW
   doble_tecnologia: undefined, // CX
-  cnt_lavado_pdp: undefined, // CY
+  cnt_lavado: undefined, // CY
   fecha_de_lavado: undefined, // CZ
   obs: undefined, // DA
 };
@@ -452,7 +452,7 @@ const unitMscExample: UnitMsc = {
   class: undefined, // CF
   motor_trademark: undefined, // CG
   reefer_tecnologia: undefined, // CH
-  current_pti_match: undefined, // CI
+  current_pti_status: undefined, // CI
   current_box_status: undefined, // CJ
   depot_status: undefined, // CK
   depot_zone: undefined, // CL
@@ -469,7 +469,7 @@ const unitMscExample: UnitMsc = {
   pti_ca: undefined, // CW
   liventus: undefined, // CX
   fecha_liventus: undefined, // CY
-  cnt_lavados_pdp: undefined, // CZ
+  cnt_lavado: undefined, // CZ
   fecha_de_lavado: undefined, // DA
   doble_tecnologia: undefined, // DB
   fecha_doble_tecnologia: undefined, // DC
@@ -580,7 +580,7 @@ const unitSmlExample: UnitSml = {
   fecha_leak_test: undefined, // CR
   preparado_coa: undefined, // CS
   doble_tecnologia: undefined, // CT
-  cnt_lavado_pdp: undefined, // CU
+  cnt_lavado: undefined, // CU
   fecha_de_lavado: undefined, // CV
   obs: undefined, // CW
 };
@@ -702,7 +702,7 @@ const unitMaeExample: UnitMae = {
   doble_tecnologia: undefined, // DI
   preparadas_coa: undefined, // DJ
   fecha_preparadas_coa: undefined, // DK
-  cnt_lavados: undefined, // DL
+  cnt_lavado: undefined, // DL
   fecha_lavado: undefined, // DM
   observacion: undefined, // DN
 };
