@@ -247,15 +247,18 @@ const unitOneExample: UnitOne = {
   fecha_reparacion_pti: undefined, // CP
   depot_status_box: undefined, // CQ
   fecha_reparacion_box: undefined, // CR
-  preparado_cot: undefined, // CS
-  fecha_pre_cot: undefined, // CT
-  leak_test: undefined, // CU
-  fecha_leak_test: undefined, // CV
-  preparado_coa: undefined, // CW
-  doble_tecnologia: undefined, // CX
-  cnt_lavado: undefined, // CY
-  fecha_de_lavado: undefined, // CZ
-  obs: undefined, // DA
+  std: undefined, // CS
+  preparado_cot: undefined, // CT
+  fecha_pre_cot: undefined, // CU
+  vigencia_cot: undefined, // CV
+  fecha_venc_pre_cot: undefined, // CW
+  leak_test: undefined, // CX
+  fecha_leak_test: undefined, // CY
+  preparado_coa: undefined, // CZ
+  doble_tecnologia: undefined, // DA
+  cnt_lavado: undefined, // DB
+  fecha_de_lavado: undefined, // DC
+  obs: undefined, // DD
 };
 
 export const unitOneHeader = Object.keys(unitOneExample);
