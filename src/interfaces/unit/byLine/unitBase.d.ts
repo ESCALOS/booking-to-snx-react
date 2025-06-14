@@ -31,7 +31,9 @@ export interface UnitBase {
   current_box_status?: string;
 
   // Campos para routing/vessels
+  loading_manifest?: string;
   loading_vessel?: string;
+  discharge_manifest?: string;
   discharge_vessel?: string;
 
   dam?: string;

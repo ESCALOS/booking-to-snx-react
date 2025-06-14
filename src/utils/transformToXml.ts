@@ -56,6 +56,7 @@ export const unitToXml = (unit: Unit): XmlInput => ({
       mode: carrier.mode,
       facility: carrier.facility,
     })),
+    group: unit.routing?.group,
   },
   reefer: unit.reefer ? { ...unit.reefer } : undefined,
   unit_etc: unit.unit_etc ? { ...unit.unit_etc } : undefined,

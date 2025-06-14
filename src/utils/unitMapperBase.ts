@@ -1,6 +1,5 @@
 import { UnitBase } from "../interfaces/unit/byLine/unitBase";
 import { Unit } from "../interfaces/unit/unit";
-import { extractManifest } from "./extractManifest";
 import { getCategoryInfo } from "./getCategoryInfo";
 import { transformYearOnDate } from "./transformDateFormat";
 import { generateCarriers } from "./generateCarriers";
@@ -69,11 +68,10 @@ export function mapUnitBase<T extends UnitBase>(row: T): Unit | null {
       carrier: row.status
         ? generateCarriers(
             isExport,
-            isExport
-              ? extractManifest(row.loading_vessel || "")
-              : extractManifest(row.discharge_vessel || "")
+            isExport ? row.loading_manifest : row.discharge_manifest
           )
         : undefined,
+      group: equipmentCondition === "OK" ? "OK" : undefined,
     },
     seals: {
       seal_1: row.seal1,
