@@ -38,6 +38,7 @@ export interface BookingTemplateExcel {
   oxygen?: string; // Oxígeno del contenedor - AK
   carbon_dioxide?: string; // Dióxido de carbono del contenedor - AL
   cliente?: string; // Cliente asociado - AM
-  tecnologia?: string; // Tecnología del contenedor - AN
-  manifiesto?: string; // Número de manifiesto - AO
+  operador_logistico?: string; // Operador logístico - AN
+  tecnologia?: string; // Tecnología del contenedor - AO
+  manifiesto?: string; // Número de manifiesto - AP
 }

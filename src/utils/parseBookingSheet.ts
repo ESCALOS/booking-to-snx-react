@@ -21,7 +21,7 @@ export function parseBookingSheet(workbook: XLSX.WorkBook): Booking[] {
       tally_limit: row.qty || undefined,
       eq_grade: tecnology,
       gross_weight: row.gross_weight || undefined,
-      commodity_id: row.commodity || undefined,
+      commodity_id: row.commodity ? row.commodity.split(" ")[0] : undefined,
       receive_limit: row.qty || undefined,
       reefer: tecnology?.includes("DRY")
         ? undefined
@@ -40,8 +40,7 @@ export function parseBookingSheet(workbook: XLSX.WorkBook): Booking[] {
         line: row.line || undefined,
         pol: row.pol || undefined,
         pod_1: row.pod || undefined,
-        eq_status: row.tecnologia || undefined,
-        pod_optional: "FCL",
+        eq_status: "FCL",
         shipper_id: row.cliente || undefined,
         carrier: {
           id: row.manifiesto || undefined,

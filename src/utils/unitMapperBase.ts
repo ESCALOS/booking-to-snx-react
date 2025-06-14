@@ -60,6 +60,7 @@ export function mapUnitBase<T extends UnitBase>(row: T): Unit | null {
     position: {
       loc_type: "YARD",
       location: "PDP",
+      slot: row.yard_position || undefined,
       orientation: "Y",
     },
     routing: {
@@ -122,7 +123,7 @@ function getTecnology(
   if (tecnologyStr.includes("DRY 20")) return "DRY 20'";
   if (tecnologyStr.includes("DRY 40")) return "DRY 40'";
   if (leakTest.includes("OK")) return "COT+COA";
-  if (tecnologyStr.includes("Liventus")) return "COA";
+  if (tecnologyStr.includes("Liventus")) return "Liventus";
   if (tecnologyStr.includes("Standard")) return "STD";
   if (tecnologyStr.includes("Cold")) return "COT";
   if (tecnologyStr.includes("Controlada")) return "COA";

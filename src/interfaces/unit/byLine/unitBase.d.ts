@@ -6,6 +6,7 @@ export interface UnitBase {
   pol?: string;
   pod?: string;
   iso?: string;
+  yard_position?: string;
   booking?: string;
 
   // Campos para reefer
