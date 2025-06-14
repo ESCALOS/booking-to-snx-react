@@ -3,6 +3,6 @@ export type TemplateOption = {
   label: string;
 };
 
-export type TemplateValue = "BK" | "BL" | "U";
+export type TemplateValue = "BK" | "BL" | "U" | "C";
 
 export type XmlConverter<T> = (item: T) => unknown;

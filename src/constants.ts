@@ -8,6 +8,7 @@ import { UnitMsc } from "interfaces/unit/byLine/unitMsc";
 import { UnitSml } from "interfaces/unit/byLine/unitSml";
 import { UnitMae } from "interfaces/unit/byLine/unitMae";
 import { BookingTemplateExcel } from "interfaces/booking/bookingTemplateExcel";
+import { ClientExcel } from "interfaces/client/clientExcel";
 
 const bookingExcelExample: BookingExcel = {
   nbr: undefined,
@@ -712,6 +713,7 @@ export const templateOptions: TemplateOption[] = [
   { value: "BK", label: "Booking" },
   { value: "BL", label: "Bill of Lading" },
   { value: "U", label: "Unit" },
+  { value: "C", label: "Clientes" },
 ];
 
 export const headerMap: Record<string, string[]> = {
@@ -721,3 +723,14 @@ export const headerMap: Record<string, string[]> = {
   "Stock SEABOARD": unitSmlHeader,
   default: unitHeaders,
 };
+
+const clientExample: ClientExcel = {
+  user_id: undefined,
+  clave: undefined,
+  ruc: undefined,
+  dni: undefined,
+  apellidos: undefined,
+  nombres: undefined,
+  correo: undefined,
+};
+export const clientHeaders = Object.keys(clientExample);

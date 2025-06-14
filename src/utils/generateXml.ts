@@ -2,19 +2,27 @@ import { BillOfLading } from "interfaces/billOfLafing/billOfLading";
 import { Booking } from "interfaces/booking";
 import { Unit } from "interfaces/unit";
 import { objectToXmlTag, XmlInput } from "./objectToXmlTag";
-import { billOfLadingXml, bookingToXml, unitToXml } from "./transformToXml";
+import {
+  billOfLadingXml,
+  bookingToXml,
+  clientToXml,
+  unitToXml,
+} from "./transformToXml";
 import { TemplateValue } from "types";
+import { Client } from "interfaces/client/client";
 
 type TemplateModelMap = {
   BK: Booking;
   BL: BillOfLading;
   U: Unit;
+  C: Client;
 };
 
 const kebabHeaderTag: Record<TemplateValue, string> = {
   BK: "booking",
   BL: "bill-of-lading",
   U: "unit",
+  C: "user",
 };
 
 const xmlConverters: {
@@ -23,6 +31,7 @@ const xmlConverters: {
   BK: bookingToXml,
   BL: billOfLadingXml,
   U: unitToXml,
+  C: clientToXml,
 };
 
 export function generateXML<K extends TemplateValue>(params: {

@@ -9,6 +9,8 @@ import { parseBookingSheet } from "@utils/parseBookingSheet";
 import { parseBlSheet } from "@utils/parseBlSheet";
 import { parseUnitSheet } from "@utils/parseUnitSheet";
 import { generateXML } from "@utils/generateXml";
+import { parseClientSheets } from "@utils/parseClientSheets";
+import { Client } from "interfaces/client/client";
 
 export const useProcessFile = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateValue>("BK");
@@ -25,7 +27,7 @@ export const useProcessFile = () => {
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data);
 
-      let parsedData: Booking[] | BillOfLading[] | Unit[] = [];
+      let parsedData: Booking[] | BillOfLading[] | Unit[] | Client[] = [];
 
       switch (selectedTemplate) {
         case "BK":
@@ -36,6 +38,9 @@ export const useProcessFile = () => {
           break;
         case "U":
           parsedData = parseUnitSheet(workbook, file.name);
+          break;
+        case "C":
+          parsedData = parseClientSheets(workbook);
           break;
       }
       const xml = generateXML({
