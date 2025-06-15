@@ -20,8 +20,12 @@ export function parseBookingSheet(workbook: XLSX.WorkBook): Booking[] {
       equipment_type: row.iso_code || undefined,
       tally_limit: row.qty || undefined,
       eq_grade: tecnology,
-      gross_weight: row.gross_weight || undefined,
-      commodity_id: row.commodity ? row.commodity.split(" ")[0] : undefined,
+      gross_weight: row.gross_weight
+        ? row.gross_weight.toString().replace(/,/g, "")
+        : undefined,
+      commodity_id: row.commodity
+        ? row.commodity.split(" ")[0].replace(/,/g, "")
+        : undefined,
       receive_limit: row.qty || undefined,
       reefer: tecnology?.includes("DRY")
         ? undefined
