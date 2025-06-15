@@ -123,7 +123,7 @@ function getTecnology(
   if (tecnologyStr.includes("DRY 20")) return "DRY 20'";
   if (tecnologyStr.includes("DRY 40")) return "DRY 40'";
   if (leakTest.includes("OK")) return "COT+COA";
-  if (tecnologyStr.includes("Liventus")) return "Liventus";
+  if (tecnologyStr.includes("Liventus")) return "LIV";
   if (tecnologyStr.includes("Standard")) return "STD";
   if (tecnologyStr.includes("Cold")) return "COT";
   if (tecnologyStr.includes("Controlada")) return "COA";
