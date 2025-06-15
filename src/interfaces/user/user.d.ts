@@ -1,6 +1,6 @@
 import { Role } from "./role";
 
-export interface Client {
+export interface User {
   id?: string; // User ID
   authentication_method?: string; // Authentication method
   password?: string; // Password
@@ -14,6 +14,7 @@ export interface Client {
   telephone?: string; // Telephone
   fax?: string; // Fax
   biz_group?: string; // Business group
+  horizon_days?: string; // Horizon days
   active?: string; // Active status
   my_list_choice?: string; // My list choice
   list_view_auto_refresh?: string; // List view auto refresh

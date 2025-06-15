@@ -5,17 +5,17 @@ import { objectToXmlTag, XmlInput } from "./objectToXmlTag";
 import {
   billOfLadingXml,
   bookingToXml,
-  clientToXml,
+  userToXml,
   unitToXml,
 } from "./transformToXml";
 import { TemplateValue } from "types";
-import { Client } from "interfaces/client/client";
+import { User } from "interfaces/user/user";
 
 type TemplateModelMap = {
   BK: Booking;
   BL: BillOfLading;
   U: Unit;
-  C: Client;
+  C: User;
 };
 
 const kebabHeaderTag: Record<TemplateValue, string> = {
@@ -31,7 +31,7 @@ const xmlConverters: {
   BK: bookingToXml,
   BL: billOfLadingXml,
   U: unitToXml,
-  C: clientToXml,
+  C: userToXml,
 };
 
 export function generateXML<K extends TemplateValue>(params: {

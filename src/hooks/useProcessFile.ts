@@ -1,3 +1,4 @@
+import { parseUserSheets } from "@utils/parseUserSheets";
 import * as XLSX from "xlsx";
 import { downloadXML } from "@utils/downloadXml";
 import { useCallback, useState } from "react";
@@ -9,8 +10,7 @@ import { parseBookingSheet } from "@utils/parseBookingSheet";
 import { parseBlSheet } from "@utils/parseBlSheet";
 import { parseUnitSheet } from "@utils/parseUnitSheet";
 import { generateXML } from "@utils/generateXml";
-import { parseClientSheets } from "@utils/parseClientSheets";
-import { Client } from "interfaces/client/client";
+import { User } from "interfaces/user/user";
 
 export const useProcessFile = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateValue>("BK");
@@ -27,7 +27,7 @@ export const useProcessFile = () => {
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data);
 
-      let parsedData: Booking[] | BillOfLading[] | Unit[] | Client[] = [];
+      let parsedData: Booking[] | BillOfLading[] | Unit[] | User[] = [];
 
       switch (selectedTemplate) {
         case "BK":
@@ -40,7 +40,7 @@ export const useProcessFile = () => {
           parsedData = parseUnitSheet(workbook, file.name);
           break;
         case "C":
-          parsedData = parseClientSheets(workbook);
+          parsedData = parseUserSheets(workbook);
           break;
       }
       const xml = generateXML({

@@ -2,7 +2,7 @@ import { Booking } from "interfaces/booking";
 import { XmlInput } from "./objectToXmlTag";
 import { Equipment, Unit } from "interfaces/unit";
 import { BillOfLading } from "interfaces/billOfLafing";
-import { Client } from "interfaces/client/client";
+import { User } from "interfaces/user/user";
 
 export const bookingToXml = (booking: Booking): XmlInput => ({
   nbr: booking.nbr,
@@ -94,24 +94,27 @@ const equipmentToXml = (equipment: Equipment): XmlInput => ({
   ownership: equipment.ownership ? { ...equipment.ownership } : undefined,
 });
 
-export const clientToXml = (client: Client): XmlInput => ({
-  id: client.id,
-  authentication_method: client.authentication_method,
-  password: client.password,
-  first_name: client.first_name,
-  last_name: client.last_name,
-  operator: client.operator,
-  complex: client.complex,
-  facility: client.facility,
-  yard: client.yard,
-  e_mail: client.e_mail,
-  telephone: client.telephone,
-  fax: client.fax,
-  biz_group: client.biz_group,
-  active: client.active,
-  my_list_choice: client.my_list_choice,
-  list_view_auto_refresh: client.list_view_auto_refresh,
-  roles: client.roles?.map((role) => ({
-    name: role.name,
-  })),
+export const userToXml = (user: User): XmlInput => ({
+  id: user.id,
+  authentication_method: user.authentication_method,
+  password: user.password,
+  first_name: user.first_name,
+  last_name: user.last_name,
+  operator: user.operator,
+  complex: user.complex,
+  facility: user.facility,
+  yard: user.yard,
+  e_mail: user.e_mail,
+  telephone: user.telephone,
+  fax: user.fax,
+  biz_group: user.biz_group,
+  horizon_days: user.horizon_days,
+  active: user.active,
+  my_list_choice: user.my_list_choice,
+  list_view_auto_refresh: user.list_view_auto_refresh,
+  roles: user.roles
+    ? user.roles.map((role) => ({
+        name: role.name,
+      }))
+    : undefined,
 });
