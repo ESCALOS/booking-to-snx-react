@@ -36,6 +36,7 @@ export interface UnitBase {
   loading_vessel?: string;
   discharge_manifest?: string;
   discharge_vessel?: string;
+  discharge_bl?: string;
 
   dam?: string;
   dt?: string;
