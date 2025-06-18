@@ -31,6 +31,7 @@ export function parseBookingSheet(workbook: XLSX.WorkBook): Booking[] {
         ? undefined
         : {
             temp_reqd_c: row.temperature || undefined,
+            humidity_pct: row.humidity || undefined,
           },
     };
 
