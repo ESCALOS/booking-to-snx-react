@@ -31,7 +31,7 @@ export const useProcessFile = () => {
 
       switch (selectedTemplate) {
         case "BK":
-          parsedData = parseBookingSheet(workbook);
+          parsedData = await parseBookingSheet(workbook);
           break;
         case "BL":
           parsedData = parseBlSheet(workbook);

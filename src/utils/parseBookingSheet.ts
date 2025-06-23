@@ -2,8 +2,11 @@ import { Booking } from "interfaces/booking";
 import { bookingTemplateHeaders } from "constants";
 import * as XLSX from "xlsx";
 import { BookingTemplateExcel } from "interfaces/booking/bookingTemplateExcel";
+import { getRucByCompanyName } from "services/companyService";
 
-export function parseBookingSheet(workbook: XLSX.WorkBook): Booking[] {
+export async function parseBookingSheet(
+  workbook: XLSX.WorkBook
+): Promise<Booking[]> {
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
   const jsonData = XLSX.utils.sheet_to_json<BookingTemplateExcel>(worksheet, {
     header: bookingTemplateHeaders,
@@ -11,10 +14,19 @@ export function parseBookingSheet(workbook: XLSX.WorkBook): Booking[] {
     range: 1,
   });
 
-  const bookingMap = new Map<string, Booking>();
+  const bookings: Booking[] = [];
 
-  jsonData.forEach((row) => {
+  for (const row of jsonData) {
     const tecnology = getTecnology(row.tecnologia, row.kind);
+
+    // Obtener RUC para cliente y operador logístico
+    const shipperId = row.cliente
+      ? await getRucByCompanyName(row.cliente)
+      : undefined;
+    const agentId = row.operador_logistico
+      ? await getRucByCompanyName(row.operador_logistico)
+      : undefined;
+
     const item = {
       qty: row.qty || undefined,
       equipment_type: row.iso_code || undefined,
@@ -35,30 +47,24 @@ export function parseBookingSheet(workbook: XLSX.WorkBook): Booking[] {
           },
     };
 
-    const existingBooking = bookingMap.get(row.booking || "");
+    const booking: Booking = {
+      nbr: row.booking || undefined,
+      line: row.line || undefined,
+      pol: row.pol || undefined,
+      pod_1: row.pod || undefined,
+      eq_status: "FCL",
+      shipper_id: shipperId || undefined,
+      agent_id: agentId || undefined,
+      carrier: {
+        id: row.manifiesto || undefined,
+      },
+      items: [item],
+    };
 
-    if (existingBooking) {
-      existingBooking.items?.push(item);
-    } else {
-      const newBooking: Booking = {
-        nbr: row.booking || undefined,
-        line: row.line || undefined,
-        pol: row.pol || undefined,
-        pod_1: row.pod || undefined,
-        eq_status: "FCL",
-        shipper_id: row.cliente || undefined,
-        carrier: {
-          id: row.manifiesto || undefined,
-        },
-        items: [item],
-      };
-      bookingMap.set(row.booking || "", newBooking);
-    }
-  });
-  console.log(`Parsed ${bookingMap.size} bookings from the sheet.`);
-  console.log(Array.from(bookingMap.values()));
+    bookings.push(booking);
+  }
 
-  return Array.from(bookingMap.values());
+  return bookings;
 }
 
 function getTecnology(

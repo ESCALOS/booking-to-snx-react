@@ -9,6 +9,7 @@ export interface Booking {
   eq_status?: string; // Estado del contenedor
   pod_optional?: string; // Puerto final
   shipper_id?: string; // RUC Shipper
+  agent_id?: string; // Operador logístico
   prevent_type_subst?: string; // Si es true es un oog
   category?: string; // Categoria
   carrier?: Carrier; // Empresa
