@@ -13,6 +13,7 @@ import { UnitOne } from "interfaces/unit/byLine/unitOne";
 import { UnitCma } from "interfaces/unit/byLine/unitCma";
 import { UnitMsc } from "interfaces/unit/byLine/unitMsc";
 import { UnitSml } from "interfaces/unit/byLine/unitSml";
+import { UnitMae } from "interfaces/unit/byLine/unitMae";
 import { generateCarriers } from "./generateCarriers";
 import { mapUnitBase } from "./unitMapperBase";
 
@@ -79,8 +80,8 @@ function parseUnitSml(workbook: XLSX.WorkBook): Unit[] {
 }
 
 function parseUnitMae(workbook: XLSX.WorkBook): Unit[] {
-  const worksheet = workbook.Sheets["Stock Pisco"];
-  const jsonData = XLSX.utils.sheet_to_json<UnitExcel>(worksheet, {
+  const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+  const jsonData = XLSX.utils.sheet_to_json<UnitMae>(worksheet, {
     header: unitMaeHeader,
     raw: false,
     range: 1,
