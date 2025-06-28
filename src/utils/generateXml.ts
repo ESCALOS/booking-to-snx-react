@@ -7,15 +7,18 @@ import {
   bookingToXml,
   userToXml,
   unitToXml,
+  truckDriverToXml,
 } from "./transformToXml";
 import { TemplateValue } from "types";
 import { User } from "interfaces/user/user";
+import { TruckDriver } from "interfaces/truckDriver/truckDriver";
 
 type TemplateModelMap = {
   BK: Booking;
   BL: BillOfLading;
   U: Unit;
   C: User;
+  TD: TruckDriver;
 };
 
 const kebabHeaderTag: Record<TemplateValue, string> = {
@@ -23,6 +26,7 @@ const kebabHeaderTag: Record<TemplateValue, string> = {
   BL: "bill-of-lading",
   U: "unit",
   C: "user",
+  TD: "truck-driver",
 };
 
 const xmlConverters: {
@@ -32,6 +36,7 @@ const xmlConverters: {
   BL: billOfLadingXml,
   U: unitToXml,
   C: userToXml,
+  TD: truckDriverToXml,
 };
 
 export function generateXML<K extends TemplateValue>(params: {

@@ -3,6 +3,7 @@ import { XmlInput } from "./objectToXmlTag";
 import { Equipment, Unit } from "interfaces/unit";
 import { BillOfLading } from "interfaces/billOfLafing";
 import { User } from "interfaces/user/user";
+import { TruckDriver } from "interfaces/truckDriver/truckDriver";
 
 export const bookingToXml = (booking: Booking): XmlInput => ({
   nbr: booking.nbr,
@@ -117,4 +118,17 @@ export const userToXml = (user: User): XmlInput => ({
         name: role.name,
       }))
     : undefined,
+});
+
+export const truckDriverToXml = (truckDriver: TruckDriver): XmlInput => ({
+  name: truckDriver.name,
+  card_id: truckDriver.card_id,
+  card_expiration: truckDriver.card_expiration,
+  license_nbr: truckDriver.license_nbr,
+  bat_nbr: truckDriver.bat_nbr, // CALLUP ID
+  license_state: truckDriver.license_state,
+  suspended: truckDriver.suspended, // DATE OF SUSPENSION
+  status: truckDriver.status,
+  flex_1: truckDriver.flex_1, // Document Type (DNI - CE)
+  life_cycle_state: truckDriver.life_cycle_state,
 });

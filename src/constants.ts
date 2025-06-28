@@ -9,6 +9,7 @@ import { UnitSml } from "interfaces/unit/byLine/unitSml";
 import { UnitMae } from "interfaces/unit/byLine/unitMae";
 import { BookingTemplateExcel } from "interfaces/booking/bookingTemplateExcel";
 import { UserExcel } from "interfaces/user/userExcel";
+import { TruckDriverExcel } from "interfaces/truckDriver/truckDriverExcel";
 
 const bookingExcelExample: BookingExcel = {
   nbr: undefined,
@@ -741,6 +742,7 @@ export const templateOptions: TemplateOption[] = [
   { value: "BL", label: "Bill of Lading" },
   { value: "U", label: "Unit" },
   { value: "C", label: "Usuarios" },
+  { value: "TD", label: "Conductores" },
 ];
 
 export const headerMap: Record<string, string[]> = {
@@ -769,3 +771,16 @@ const userExample: UserExcel = {
   rol7: undefined,
 };
 export const userHeaders = Object.keys(userExample);
+
+const truckDriverExample: TruckDriverExcel = {
+  name: undefined,
+  card_id: undefined,
+  license: undefined,
+  callup_id: undefined,
+  license_state: undefined,
+  status: undefined,
+  document_type: undefined,
+  internal: undefined,
+  life_cycle_state: undefined,
+};
+export const truckDriverHeaders = Object.keys(truckDriverExample);
