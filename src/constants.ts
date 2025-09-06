@@ -1,3 +1,4 @@
+import { BillOfLadingCargaGeneralExcel } from "./interfaces/billOfLadingCargaGeneral/billOfLadingCargaGeneralExcel.d";
 import { BlExcel } from "interfaces/billOfLafing";
 import { BookingExcel } from "interfaces/booking";
 import { UnitExcel } from "interfaces/unit";
@@ -10,6 +11,8 @@ import { UnitMae } from "interfaces/unit/byLine/unitMae";
 import { BookingTemplateExcel } from "interfaces/booking/bookingTemplateExcel";
 import { UserExcel } from "interfaces/user/userExcel";
 import { TruckDriverExcel } from "interfaces/truckDriver/truckDriverExcel";
+import { BillOfLadingItemCargaGeneralExcel } from "interfaces/billOfLadingCargaGeneral/billOfLadingItemCargaGeneralExcel";
+import { GoodsBlCargaGeneralExcel } from "interfaces/billOfLadingCargaGeneral";
 
 const bookingExcelExample: BookingExcel = {
   nbr: undefined,
@@ -740,6 +743,7 @@ export const unitMaeHeader = Object.keys(unitMaeExample);
 export const templateOptions: TemplateOption[] = [
   { value: "BK", label: "Booking" },
   { value: "BL", label: "Bill of Lading" },
+  { value: "BLCG", label: "Bill of Lading Carga General" },
   { value: "U", label: "Unit" },
   { value: "C", label: "Usuarios" },
   { value: "TD", label: "Conductores" },
@@ -784,3 +788,49 @@ const truckDriverExample: TruckDriverExcel = {
   life_cycle_state: undefined,
 };
 export const truckDriverHeaders = Object.keys(truckDriverExample);
+
+const blCgExample: BillOfLadingCargaGeneralExcel = {
+  bl_number: "", // A
+  category: undefined, // B
+  manifiesto: undefined, // C
+  puerto_de_descarga: undefined, // D
+  puerto_de_carga: undefined, // E
+  shipper: undefined, // F
+  consignee: undefined, // G
+  bl_type: undefined, // H
+  original_bl_number: undefined, // I
+  numero_de_detalle: undefined, // J
+  codigo_de_deposito: undefined, // K
+  peso_total_manifestado: undefined, // L
+  bultos_manifestados: undefined, // M
+  fecha_y_hora_de_ingreso_de_la_carga: undefined, // N
+  fecha_y_hora_de_termino_operativo_de_la_nave: undefined, // O
+};
+
+export const blCgHeaders = Object.keys(blCgExample);
+
+const blItemCgExample: BillOfLadingItemCargaGeneralExcel = {
+  bl_number: "", // A
+  item_number: undefined, // B
+  commodity: undefined, // C
+  bulk: undefined, // D
+  bulk_units: undefined, // E
+  item_quantity: undefined, // F
+  item_total_weigth_kg: undefined, // G
+  dam: undefined, // H
+  codigo_de_deposito: undefined, // I
+  almacen_simple: undefined, // J
+};
+
+export const blItemCgHeaders = Object.keys(blItemCgExample);
+
+const goodsBlCgExample: GoodsBlCargaGeneralExcel = {
+  nro: undefined, // A
+  nbr_bl: "", // B
+  vin_chassis: undefined, // C
+  marca: undefined, // D
+  cliente: undefined, // E
+  pesos: undefined, // F
+};
+
+export const goodsBlCgHeaders = Object.keys(goodsBlCgExample);

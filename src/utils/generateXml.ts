@@ -4,6 +4,7 @@ import { Unit } from "interfaces/unit";
 import { objectToXmlTag, XmlInput } from "./objectToXmlTag";
 import {
   billOfLadingXml,
+  billOfLadingCargaGeneralToXml,
   bookingToXml,
   userToXml,
   unitToXml,
@@ -12,10 +13,12 @@ import {
 import { TemplateValue } from "types";
 import { User } from "interfaces/user/user";
 import { TruckDriver } from "interfaces/truckDriver/truckDriver";
+import { BillOfLadingCargaGeneral } from "interfaces/billOfLadingCargaGeneral";
 
 type TemplateModelMap = {
   BK: Booking;
   BL: BillOfLading;
+  BLCG: BillOfLadingCargaGeneral;
   U: Unit;
   C: User;
   TD: TruckDriver;
@@ -24,6 +27,7 @@ type TemplateModelMap = {
 const kebabHeaderTag: Record<TemplateValue, string> = {
   BK: "booking",
   BL: "bill-of-lading",
+  BLCG: "bill-of-lading",
   U: "unit",
   C: "user",
   TD: "truck-driver",
@@ -34,6 +38,7 @@ const xmlConverters: {
 } = {
   BK: bookingToXml,
   BL: billOfLadingXml,
+  BLCG: billOfLadingCargaGeneralToXml,
   U: unitToXml,
   C: userToXml,
   TD: truckDriverToXml,

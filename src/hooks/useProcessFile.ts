@@ -1,10 +1,12 @@
 import { parseUserSheets } from "@utils/parseUserSheets";
+import { parseBlCgSheet } from "@utils/parseBlCgSheet";
 import * as XLSX from "xlsx";
 import { downloadXML } from "@utils/downloadXml";
 import { useCallback, useState } from "react";
 import { TemplateValue } from "types";
 import { Booking } from "interfaces/booking";
 import { BillOfLading } from "interfaces/billOfLafing";
+import { BillOfLadingCargaGeneral } from "interfaces/billOfLadingCargaGeneral";
 import { Unit } from "interfaces/unit";
 import { parseBookingSheet } from "@utils/parseBookingSheet";
 import { parseBlSheet } from "@utils/parseBlSheet";
@@ -32,6 +34,7 @@ export const useProcessFile = () => {
       let parsedData:
         | Booking[]
         | BillOfLading[]
+        | BillOfLadingCargaGeneral[]
         | Unit[]
         | User[]
         | TruckDriver[] = [];
@@ -42,6 +45,11 @@ export const useProcessFile = () => {
           break;
         case "BL":
           parsedData = parseBlSheet(workbook);
+          break;
+        case "BLCG":
+          parsedData = parseBlCgSheet(workbook);
+          console.log(parsedData);
+
           break;
         case "U":
           parsedData = parseUnitSheet(workbook, file.name);

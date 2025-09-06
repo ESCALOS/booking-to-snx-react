@@ -2,6 +2,7 @@ import { Booking } from "interfaces/booking";
 import { XmlInput } from "./objectToXmlTag";
 import { Equipment, Unit } from "interfaces/unit";
 import { BillOfLading } from "interfaces/billOfLafing";
+import { BillOfLadingCargaGeneral } from "interfaces/billOfLadingCargaGeneral";
 import { User } from "interfaces/user/user";
 import { TruckDriver } from "interfaces/truckDriver/truckDriver";
 
@@ -82,6 +83,43 @@ export const billOfLadingXml = (bill_of_lading: BillOfLading): XmlInput => ({
   goods_bl: bill_of_lading.goods_bl?.map((goods_bl) => ({
     ...goods_bl,
   })),
+});
+
+export const billOfLadingCargaGeneralToXml = (
+  billOfLading: BillOfLadingCargaGeneral
+): XmlInput => ({
+  nbr: billOfLading.nbr,
+  category: billOfLading.category,
+  line: billOfLading.line,
+  shipper_id: billOfLading.shipper_id,
+  consignee_id: billOfLading.consignee_id,
+  carrier_visit: billOfLading.carrier_visit,
+  pol: billOfLading.pol,
+  pod_1: billOfLading.pod_1,
+  agent: billOfLading.agent,
+  type: billOfLading.type,
+  original_bl_nbr: billOfLading.original_bl_nbr,
+  items: billOfLading.items?.map((item) => ({
+    nbr: item.nbr,
+    is_bulk: item.is_bulk,
+    piece_is_bulk: item.piece_is_bulk,
+    quantity: item.quantity,
+    commodity_id: item.commodity_id,
+    bulk_unit: item.bulk_unit,
+    weight_total_kg: item.weight_total_kg,
+    bl_item_is_ib_to_ob_move_direct: item.bl_item_is_ib_to_ob_move_direct,
+  })),
+  goods_bl: billOfLading.goods_bl?.map((good) => ({
+    unit_id: good.unit_id,
+  })),
+  bl_flex: billOfLading.bl_flex
+    ? {
+        bl_flex_string_03: billOfLading.bl_flex.bl_flex_string_03,
+        bl_flex_string_04: billOfLading.bl_flex.bl_flex_string_04,
+        bl_flex_string_05: billOfLading.bl_flex.bl_flex_string_05,
+        bl_flex_string_06: billOfLading.bl_flex.bl_flex_string_06,
+      }
+    : undefined,
 });
 
 const equipmentToXml = (equipment: Equipment): XmlInput => ({
