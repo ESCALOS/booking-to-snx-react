@@ -20,14 +20,6 @@ export const bookingToXml = (booking: Booking): XmlInput => ({
   items: booking.items?.map((item) => ({
     ...item,
     reefer: item.reefer ? { ...item.reefer } : undefined,
-    oog: {
-      is_oog: "N",
-      oog_back_cm: "0",
-      oog_front_cm: "0",
-      oog_left_cm: "0",
-      oog_right_cm: "0",
-      oog_top_cm: "0",
-    },
   })),
 });
 
