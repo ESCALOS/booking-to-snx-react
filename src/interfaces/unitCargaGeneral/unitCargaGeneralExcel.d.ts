@@ -1,0 +1,22 @@
+export interface UnitCargaGeneralExcel {
+  id: string; // A
+  category?: string; // B
+  transit_state?: string; // C
+  freight_kind?: string; // D
+  iso_type?: string; // E
+  ubicacion?: string; // F
+  pod?: string; // G
+  ob_visit?: string; // H
+  weight?: string; // I
+  commodity?: string; // J
+  codigo_aduana?: string; // K
+  tipo_vehiculo?: string; // L
+  cabotaje?: string; // M
+  dam?: string; // N
+  rce?: string; // O
+  rm?: string; // P
+  codigo_deposito?: string; // Q
+  almacen_simple?: string; // R
+  bill_of_lading?: string; // S
+  bl_type?: string; // T
+}

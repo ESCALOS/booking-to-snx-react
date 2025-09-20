@@ -6,6 +6,7 @@ export interface UnitFlex {
   unit_flex_5?: string; // Estado de transmisión
   unit_flex_8?: string; // Canal Aduanero
   unit_flex_9?: string; // Bultos
+  unit_flex_10?: string; // Tipo de carga
   unit_flex_11?: string;
   unit_flex_13?: string; // Lavado
   unit_flex_14?: string;

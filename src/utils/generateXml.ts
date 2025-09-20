@@ -9,17 +9,20 @@ import {
   userToXml,
   unitToXml,
   truckDriverToXml,
+  unitCargaGeneralToXml,
 } from "./transformToXml";
 import { TemplateValue } from "types";
 import { User } from "interfaces/user/user";
 import { TruckDriver } from "interfaces/truckDriver/truckDriver";
 import { BillOfLadingCargaGeneral } from "interfaces/billOfLadingCargaGeneral";
+import { UnitCargaGeneral } from "interfaces/unitCargaGeneral/unitCargaGeneral";
 
 type TemplateModelMap = {
   BK: Booking;
   BL: BillOfLading;
   BLCG: BillOfLadingCargaGeneral;
   U: Unit;
+  UCG: UnitCargaGeneral;
   C: User;
   TD: TruckDriver;
 };
@@ -29,6 +32,7 @@ const kebabHeaderTag: Record<TemplateValue, string> = {
   BL: "bill-of-lading",
   BLCG: "bill-of-lading",
   U: "unit",
+  UCG: "unit",
   C: "user",
   TD: "truck-driver",
 };
@@ -40,6 +44,7 @@ const xmlConverters: {
   BL: billOfLadingXml,
   BLCG: billOfLadingCargaGeneralToXml,
   U: unitToXml,
+  UCG: unitCargaGeneralToXml,
   C: userToXml,
   TD: truckDriverToXml,
 };

@@ -15,6 +15,8 @@ import { generateXML } from "@utils/generateXml";
 import { User } from "interfaces/user/user";
 import { TruckDriver } from "interfaces/truckDriver/truckDriver";
 import { parseTruckDriverSheets } from "@utils/parseTruckDriverSheets";
+import { UnitCargaGeneral } from "interfaces/unitCargaGeneral/unitCargaGeneral";
+import { parseUnitCgSheet } from "@utils/parseUnitCgSheet";
 
 export const useProcessFile = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateValue>("BK");
@@ -36,6 +38,7 @@ export const useProcessFile = () => {
         | BillOfLading[]
         | BillOfLadingCargaGeneral[]
         | Unit[]
+        | UnitCargaGeneral[]
         | User[]
         | TruckDriver[] = [];
 
@@ -48,11 +51,14 @@ export const useProcessFile = () => {
           break;
         case "BLCG":
           parsedData = parseBlCgSheet(workbook);
-          console.log(parsedData);
-
           break;
         case "U":
           parsedData = parseUnitSheet(workbook, file.name);
+          break;
+        case "UCG":
+          parsedData = parseUnitCgSheet(workbook);
+          console.log(parsedData);
+
           break;
         case "C":
           parsedData = parseUserSheets(workbook);

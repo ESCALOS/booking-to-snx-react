@@ -13,6 +13,7 @@ import { UserExcel } from "interfaces/user/userExcel";
 import { TruckDriverExcel } from "interfaces/truckDriver/truckDriverExcel";
 import { BillOfLadingItemCargaGeneralExcel } from "interfaces/billOfLadingCargaGeneral/billOfLadingItemCargaGeneralExcel";
 import { GoodsBlCargaGeneralExcel } from "interfaces/billOfLadingCargaGeneral";
+import { UnitCargaGeneralExcel } from "interfaces/unitCargaGeneral/unitCargaGeneralExcel";
 
 const bookingExcelExample: BookingExcel = {
   nbr: undefined,
@@ -745,6 +746,7 @@ export const templateOptions: TemplateOption[] = [
   { value: "BL", label: "Bill of Lading" },
   { value: "BLCG", label: "Bill of Lading Carga General" },
   { value: "U", label: "Unit" },
+  { value: "UCG", label: "Unit Carga General" },
   { value: "C", label: "Usuarios" },
   { value: "TD", label: "Conductores" },
 ];
@@ -834,3 +836,27 @@ const goodsBlCgExample: GoodsBlCargaGeneralExcel = {
 };
 
 export const goodsBlCgHeaders = Object.keys(goodsBlCgExample);
+
+const unitCgExample: UnitCargaGeneralExcel = {
+  id: "", // A
+  category: undefined, // B
+  transit_state: undefined, // C
+  freight_kind: undefined, // D
+  iso_type: undefined, // E
+  ubicacion: undefined, // F
+  pod: undefined, // G
+  ob_visit: undefined, // H
+  weight: undefined, // I
+  commodity: undefined, // J
+  codigo_aduana: undefined, // K
+  tipo_vehiculo: undefined, // L
+  cabotaje: undefined, // M
+  dam: undefined, // N
+  rce: undefined, // O
+  rm: undefined, // P
+  codigo_deposito: undefined, // Q
+  almacen_simple: undefined, // R
+  bill_of_lading: undefined, // S
+  bl_type: undefined, // T
+};
+export const unitCgHeaders = Object.keys(unitCgExample);

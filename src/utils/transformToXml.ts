@@ -5,6 +5,7 @@ import { BillOfLading } from "interfaces/billOfLafing";
 import { BillOfLadingCargaGeneral } from "interfaces/billOfLadingCargaGeneral";
 import { User } from "interfaces/user/user";
 import { TruckDriver } from "interfaces/truckDriver/truckDriver";
+import { UnitCargaGeneral } from "interfaces/unitCargaGeneral/unitCargaGeneral";
 
 export const bookingToXml = (booking: Booking): XmlInput => ({
   nbr: booking.nbr,
@@ -161,4 +162,40 @@ export const truckDriverToXml = (truckDriver: TruckDriver): XmlInput => ({
   status: truckDriver.status,
   flex_1: truckDriver.flex_1, // Document Type (DNI - CE)
   life_cycle_state: truckDriver.life_cycle_state,
+});
+
+export const unitCargaGeneralToXml = (unit: UnitCargaGeneral): XmlInput => ({
+  id: unit.id,
+  category: unit.category,
+  restow: unit.restow,
+  transit_state: unit.transit_state,
+  freight_kind: unit.freight_kind,
+  line: unit.line,
+  unique_key: unit.unique_key,
+  is_verifies_yard_pos: unit.is_verifies_yard_pos,
+  is_stowplan_posted: unit.is_stowplan_posted,
+  equipment: unit.equipment ? { ...equipmentToXml(unit.equipment) } : undefined,
+  position: unit.position ? { ...unit.position } : undefined,
+  routing: {
+    pol: unit.routing?.pol,
+    pod_1: unit.routing?.pod_1,
+    carrier: unit.routing?.carrier?.map((carrier) => ({
+      id: carrier.id,
+      direction: carrier.direction,
+      qualifier: carrier.qualifier,
+      mode: carrier.mode,
+      facility: carrier.facility,
+    })),
+  },
+  contents: unit.contents ? { ...unit.contents } : undefined,
+  unit_etc: unit.unit_etc ? { ...unit.unit_etc } : undefined,
+  unit_flex: unit.unit_flex ? { ...unit.unit_flex } : undefined,
+  ufv_flex: unit.ufv_flex ? { ...unit.ufv_flex } : undefined,
+  non_move_history: unit.non_move_history
+    ? {
+        event: unit.non_move_history.event
+          ? { ...unit.non_move_history.event }
+          : undefined,
+      }
+    : undefined,
 });
