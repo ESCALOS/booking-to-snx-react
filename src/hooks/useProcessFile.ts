@@ -16,7 +16,10 @@ import { User } from "interfaces/user/user";
 import { TruckDriver } from "interfaces/truckDriver/truckDriver";
 import { parseTruckDriverSheets } from "@utils/parseTruckDriverSheets";
 import { UnitCargaGeneral } from "interfaces/unitCargaGeneral/unitCargaGeneral";
-import { parseUnitCgSheet } from "@utils/parseUnitCgSheet";
+import {
+  parseUnitCgCombined,
+  UnitCgCombinedResult,
+} from "@utils/parseUnitCgCombined";
 
 export const useProcessFile = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateValue>("BK");
@@ -40,7 +43,8 @@ export const useProcessFile = () => {
         | Unit[]
         | UnitCargaGeneral[]
         | User[]
-        | TruckDriver[] = [];
+        | TruckDriver[]
+        | UnitCgCombinedResult[] = [];
 
       switch (selectedTemplate) {
         case "BK":
@@ -56,9 +60,7 @@ export const useProcessFile = () => {
           parsedData = parseUnitSheet(workbook, file.name);
           break;
         case "UCG":
-          parsedData = parseUnitCgSheet(workbook);
-          console.log(parsedData);
-
+          parsedData = [parseUnitCgCombined(workbook)];
           break;
         case "C":
           parsedData = parseUserSheets(workbook);

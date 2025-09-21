@@ -17,6 +17,6 @@ export interface UnitCargaGeneralExcel {
   rm?: string; // P
   codigo_deposito?: string; // Q
   almacen_simple?: string; // R
-  bill_of_lading?: string; // S
+  bill_of_lading: string; // S
   bl_type?: string; // T
 }

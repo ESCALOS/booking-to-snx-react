@@ -15,14 +15,14 @@ import { TemplateValue } from "types";
 import { User } from "interfaces/user/user";
 import { TruckDriver } from "interfaces/truckDriver/truckDriver";
 import { BillOfLadingCargaGeneral } from "interfaces/billOfLadingCargaGeneral";
-import { UnitCargaGeneral } from "interfaces/unitCargaGeneral/unitCargaGeneral";
+import { UnitCgCombinedResult } from "./parseUnitCgCombined";
 
 type TemplateModelMap = {
   BK: Booking;
   BL: BillOfLading;
   BLCG: BillOfLadingCargaGeneral;
   U: Unit;
-  UCG: UnitCargaGeneral;
+  UCG: UnitCgCombinedResult;
   C: User;
   TD: TruckDriver;
 };
@@ -32,7 +32,7 @@ const kebabHeaderTag: Record<TemplateValue, string> = {
   BL: "bill-of-lading",
   BLCG: "bill-of-lading",
   U: "unit",
-  UCG: "unit",
+  UCG: "bill-of-lading",
   C: "user",
   TD: "truck-driver",
 };
@@ -44,7 +44,7 @@ const xmlConverters: {
   BL: billOfLadingXml,
   BLCG: billOfLadingCargaGeneralToXml,
   U: unitToXml,
-  UCG: unitCargaGeneralToXml,
+  UCG: () => ({ dummy: "" }), // Placeholder, se maneja especialmente
   C: userToXml,
   TD: truckDriverToXml,
 };
@@ -54,16 +54,37 @@ export function generateXML<K extends TemplateValue>(params: {
   selectedTemplate: K;
 }): string {
   const { model, selectedTemplate } = params;
-  const tag = kebabHeaderTag[selectedTemplate];
-  const convert = xmlConverters[selectedTemplate];
 
   const xml = [
     `<?xml version="1.0" encoding="UTF-8"?>`,
     `<argo:snx xmlns:argo="http://www.navis.com/argo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.navis.com/argo snx.xsd">`,
   ];
 
-  for (const item of model) {
-    xml.push(objectToXmlTag(tag, convert(item)));
+  // Caso especial para UCG que combina units y bill-of-lading
+  if (selectedTemplate === "UCG") {
+    const combinedData = model as UnitCgCombinedResult[];
+
+    for (const item of combinedData) {
+      // Agregar units
+      for (const unit of item.units) {
+        xml.push(objectToXmlTag("unit", unitCargaGeneralToXml(unit)));
+      }
+
+      // Agregar bills of lading
+      for (const bl of item.billsOfLading) {
+        xml.push(
+          objectToXmlTag("bill-of-lading", billOfLadingCargaGeneralToXml(bl))
+        );
+      }
+    }
+  } else {
+    // Casos normales
+    const tag = kebabHeaderTag[selectedTemplate];
+    const convert = xmlConverters[selectedTemplate];
+
+    for (const item of model) {
+      xml.push(objectToXmlTag(tag, convert(item)));
+    }
   }
 
   xml.push(`</argo:snx>`);

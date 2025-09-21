@@ -856,7 +856,7 @@ const unitCgExample: UnitCargaGeneralExcel = {
   rm: undefined, // P
   codigo_deposito: undefined, // Q
   almacen_simple: undefined, // R
-  bill_of_lading: undefined, // S
+  bill_of_lading: "", // S
   bl_type: undefined, // T
 };
 export const unitCgHeaders = Object.keys(unitCgExample);

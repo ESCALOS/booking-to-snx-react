@@ -104,6 +104,7 @@ export const billOfLadingCargaGeneralToXml = (
   })),
   goods_bl: billOfLading.goods_bl?.map((good) => ({
     unit_id: good.unit_id,
+    unit_key: good.unit_key,
   })),
   bl_flex: billOfLading.bl_flex
     ? {
