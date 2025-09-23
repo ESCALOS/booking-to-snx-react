@@ -13,13 +13,13 @@ export function parseTruckDriverSheets(workbook: XLSX.WorkBook): TruckDriver[] {
 
   return jsonData.map((row) => {
     return {
-      name: row.name || undefined,
-      card_id: row.card_id || undefined,
-      license_nbr: row.license || undefined,
-      bat_nbr: row.callup_id || undefined,
-      license_state: row.license_state || undefined,
-      status: row.status || undefined,
-      flex_1: row.document_type || undefined,
+      name: row.name?.toString().trim() || undefined,
+      card_id: row.card_id?.toString().trim() || undefined,
+      license_nbr: row.license?.toString().trim() || undefined,
+      bat_nbr: row.callup_id?.toString().trim() || undefined,
+      license_state: row.license_state?.toString().trim() || undefined,
+      status: row.status?.toString().trim() || undefined,
+      flex_1: row.document_type?.toString().trim() || undefined,
       life_cycle_state: "ACT",
     };
   });

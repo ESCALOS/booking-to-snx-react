@@ -36,7 +36,8 @@ export function parseUnitCgSheet(workbook: XLSX.WorkBook): UnitCargaGeneral[] {
       loc_type: row.transit_state?.toUpperCase() === "YARD" ? "YARD" : "TRUCK",
       location:
         row.transit_state?.toUpperCase() === "YARD" ? "PDP" : "GEN_TRUCK",
-      slot: row.transit_state?.toUpperCase() === "YARD" ? "CFS" : undefined,
+      slot:
+        row.transit_state?.toUpperCase() === "YARD" ? row.ubicacion : undefined,
     },
     routing: {
       pol: "PEPIO",

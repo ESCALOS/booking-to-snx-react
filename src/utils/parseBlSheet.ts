@@ -23,9 +23,9 @@ export function parseBlSheet(workbook: XLSX.WorkBook): BillOfLading[] {
   const goodsMap = new Map<string, GoodsBl[]>();
 
   rowsGoods.forEach((row) => {
-    const blNbr = row.bl_nbr || ""; // Asumiendo que 'bl_nbr' es la propiedad que se utiliza en worksheetGoods
+    const blNbr = row.bl_nbr?.toString().trim() || ""; // Asumiendo que 'bl_nbr' es la propiedad que se utiliza en worksheetGoods
     const unit: GoodsBl = {
-      unit_id: row.unit_id || "",
+      unit_id: row.unit_id?.toString().trim() || "",
     };
 
     if (goodsMap.has(blNbr)) {
@@ -38,32 +38,32 @@ export function parseBlSheet(workbook: XLSX.WorkBook): BillOfLading[] {
   const blMap = new Map<string, BillOfLading>();
 
   rows.forEach((row) => {
-    const nbr = row.nbr || "";
+    const nbr = row.nbr?.toString().trim() || "";
     const item: Item = {
-      nbr: row.item_nbr || undefined,
-      is_bulk: row.item_is_bulk || undefined,
+      nbr: row.item_nbr?.toString().trim() || undefined,
+      is_bulk: row.item_is_bulk?.toString().trim() || undefined,
       piece_is_bulk: "N",
-      quantity: row.item_quantity || undefined,
-      commodity_id: row.item_commodity_id || undefined,
-      weight_total_kg: row.item_weight_total_kg || undefined,
+      quantity: row.item_quantity?.toString().trim() || undefined,
+      commodity_id: row.item_commodity_id?.toString().trim() || undefined,
+      weight_total_kg: row.item_weight_total_kg?.toString().trim() || undefined,
       bl_item_is_ib_to_ob_move_direct: "N",
     };
 
-    const existingBl = blMap.get(row.nbr || "");
+    const existingBl = blMap.get(row.nbr?.toString().trim() || "");
 
     // Agregar items al Bill of Lading existente
     if (existingBl) {
       existingBl.items?.push(item);
     } else {
       const bl: BillOfLading = {
-        nbr: row.nbr || undefined,
+        nbr: row.nbr?.toString().trim() || undefined,
         type: row.original_bl_nbr ? "HOUSE" : "MASTER",
-        original_bl_nbr: row.original_bl_nbr || undefined,
-        category: row.category || undefined,
-        line: row.line || undefined,
-        shipper_id: row.shipper_id || undefined,
-        consignee_id: row.consignee_id || undefined,
-        carrier_visit: row.carrier_visit || undefined,
+        original_bl_nbr: row.original_bl_nbr?.toString().trim() || undefined,
+        category: row.category?.toString().trim() || undefined,
+        line: row.line?.toString().trim() || undefined,
+        shipper_id: row.shipper_id?.toString().trim() || undefined,
+        consignee_id: row.consignee_id?.toString().trim() || undefined,
+        carrier_visit: row.carrier_visit?.toString().trim() || undefined,
         bl_is_ib_to_ob_move_direct: "N",
         items: row.item_commodity_id ? [item] : undefined,
         goods_bl: goodsMap.get(nbr) || [], // Asignar goods_bl a partir del mapa

@@ -23,18 +23,18 @@ export function parseUnitCgCombined(
   // Generar units
   const units: UnitCargaGeneral[] = rowsGoods.map(
     (row: UnitCargaGeneralExcel) => ({
-      id: row.id,
-      category: row.category,
+      id: row.id?.toString().trim(),
+      category: row.category?.toString().trim(),
       restow: "NONE",
-      transit_state: row.transit_state,
-      freight_kind: row.freight_kind,
+      transit_state: row.transit_state?.toString().trim(),
+      freight_kind: row.freight_kind?.toString().trim(),
       line: "GCP",
-      unique_key: row.id,
+      unique_key: row.id?.toString().trim(),
       is_verifies_yard_pos: "N",
       is_stowplan_posted: "N",
       equipment: {
-        eqid: row.id,
-        type: row.iso_type,
+        eqid: row.id?.toString().trim(),
+        type: row.iso_type?.toString().trim(),
         class: "CTR",
         tank_rails: "UNKNOWN",
         life_cycle_state: "ACT",
@@ -42,45 +42,52 @@ export function parseUnitCgCombined(
       },
       position: {
         loc_type:
-          row.transit_state?.toUpperCase() === "YARD" ? "YARD" : "TRUCK",
+          row.transit_state?.toString().trim().toUpperCase() === "YARD"
+            ? "YARD"
+            : "TRUCK",
         location:
-          row.transit_state?.toUpperCase() === "YARD" ? "PDP" : "GEN_TRUCK",
-        slot: row.transit_state?.toUpperCase() === "YARD" ? "CFS" : undefined,
+          row.transit_state?.toString().trim().toUpperCase() === "YARD"
+            ? "PDP"
+            : "GEN_TRUCK",
+        slot:
+          row.transit_state?.toString().trim().toUpperCase() === "YARD"
+            ? row.ubicacion?.toString().trim()
+            : undefined,
       },
       routing: {
         pol: "PEPIO",
-        pod_1: row.pod,
+        pod_1: row.pod?.toString().trim(),
         carrier: row.category
           ? generateCarriers(
-              row.category?.toUpperCase().trim() === "EXPORT",
-              row.ob_visit || undefined
+              row.category?.toString().trim().toUpperCase() === "EXPORT",
+              row.ob_visit?.toString().trim() || undefined
             )
           : undefined,
       },
       contents: {
-        weight_kg: row.weight,
-        weight_kg_advised: row.weight,
-        commodity_id: row.commodity,
-        bl_nbr: row.bill_of_lading,
+        weight_kg: row.weight?.toString().trim(),
+        weight_kg_advised: row.weight?.toString().trim(),
+        commodity_id: row.commodity?.toString().trim(),
+        bl_nbr: row.bill_of_lading?.toString().trim(),
       },
       unit_etc: {
-        category: row.category,
+        category: row.category?.toString().trim(),
         line: "GCP",
       },
       unit_flex: {
-        unit_flex_1: row.cabotaje || undefined,
-        unit_flex_2: row.codigo_aduana || undefined,
-        unit_flex_10: row.tipo_vehiculo || undefined,
+        unit_flex_1: row.cabotaje?.toString().trim() || undefined,
+        unit_flex_2: row.codigo_aduana?.toString().trim() || undefined,
+        unit_flex_10: row.tipo_vehiculo?.toString().trim() || undefined,
       },
       ufv_flex: {
-        ufv_flex_1: row.dam || undefined,
-        ufv_flex_2: row.rce || undefined,
-        ufv_flex_3: row.codigo_deposito || undefined,
-        ufv_flex_4: row.rm || undefined,
-        ufv_flex_7: row.almacen_simple || undefined,
+        ufv_flex_1: row.dam?.toString().trim() || undefined,
+        ufv_flex_2: row.rce?.toString().trim() || undefined,
+        ufv_flex_3: row.codigo_deposito?.toString().trim() || undefined,
+        ufv_flex_4: row.rm?.toString().trim() || undefined,
+        ufv_flex_7: row.almacen_simple?.toString().trim() || undefined,
       },
       non_move_history:
-        row.transit_state?.toUpperCase() === "YARD"
+        row.transit_state?.toString().trim().toUpperCase() === "YARD"
           ? undefined
           : {
               event: {

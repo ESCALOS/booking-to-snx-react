@@ -17,12 +17,12 @@ export function parseFromUnitCgSheetToBlXml(
   const blMap = new Map<string, BillOfLadingCargaGeneral>();
 
   rowsGoods.forEach((row) => {
-    const blNumber = row.bill_of_lading;
+    const blNumber = row.bill_of_lading?.toString().trim() || "";
 
     // Crear el good_bl para esta unidad
     const goodBl = {
-      unit_id: row.id || "",
-      unit_key: row.id || "",
+      unit_id: row.id?.toString().trim() || "",
+      unit_key: row.id?.toString().trim() || "",
     };
 
     const existingBl = blMap.get(blNumber);
@@ -32,13 +32,14 @@ export function parseFromUnitCgSheetToBlXml(
       existingBl.goods_bl?.push(goodBl);
     } else {
       // Crear nuevo BillOfLading
-      const type = row.bl_type === "HOUSE" ? "HOUSE" : "MASTER";
+      const type =
+        row.bl_type?.toString().trim() === "HOUSE" ? "HOUSE" : "MASTER";
 
       const newBl: BillOfLadingCargaGeneral = {
         nbr: blNumber,
-        category: row.category,
+        category: row.category?.toString().trim() || undefined,
         line: "GCP",
-        carrier_visit: row.ob_visit,
+        carrier_visit: row.ob_visit?.toString().trim() || undefined,
         pol: "PEPIO",
         type,
         goods_bl: [goodBl],
