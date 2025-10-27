@@ -42,26 +42,29 @@ export function parseUnitCgCombined(
       },
       position: {
         loc_type:
-          row.transit_state?.toString().trim().toUpperCase() === "YARD"
-            ? "YARD"
-            : "TRUCK",
+          row.category?.toString().trim().toLocaleUpperCase() === "IMPORT" ? "VESSEL" :
+            row.transit_state?.toString().trim().toUpperCase() === "YARD"
+              ? "YARD"
+              : "TRUCK",
         location:
-          row.transit_state?.toString().trim().toUpperCase() === "YARD"
-            ? "PDP"
-            : "GEN_TRUCK",
+          row.category?.toString().trim().toLocaleUpperCase() === "IMPORT" ? row.ob_visit :
+            row.transit_state?.toString().trim().toUpperCase() === "YARD"
+              ? "PDP"
+              : "GEN_TRUCK",
         slot:
-          row.transit_state?.toString().trim().toUpperCase() === "YARD"
-            ? row.ubicacion?.toString().trim()
-            : undefined,
+          row.category?.toString().trim().toLocaleUpperCase() === "IMPORT" ? row.ubicacion :
+            row.transit_state?.toString().trim().toUpperCase() === "YARD"
+              ? row.ubicacion?.toString().trim()
+              : undefined,
       },
       routing: {
         pol: "PEPIO",
         pod_1: row.pod?.toString().trim(),
         carrier: row.category
           ? generateCarriers(
-              row.category?.toString().trim().toUpperCase() === "EXPORT",
-              row.ob_visit?.toString().trim() || undefined
-            )
+            row.category?.toString().trim().toUpperCase() === "EXPORT",
+            row.ob_visit?.toString().trim() || undefined
+          )
           : undefined,
       },
       contents: {
@@ -90,13 +93,13 @@ export function parseUnitCgCombined(
         row.transit_state?.toString().trim().toUpperCase() === "YARD"
           ? undefined
           : {
-              event: {
-                id: "CG_GENERATE_BILLABLE_EVENTS",
-                time_event_applied: "",
-                user_id: "admin",
-                is_billable: "",
-              },
+            event: {
+              id: "CG_GENERATE_BILLABLE_EVENTS",
+              time_event_applied: "",
+              user_id: "admin",
+              is_billable: "",
             },
+          },
     })
   );
 
