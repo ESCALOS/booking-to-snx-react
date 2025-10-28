@@ -749,6 +749,7 @@ export const templateOptions: TemplateOption[] = [
   { value: "UCG", label: "Unit Carga General" },
   { value: "C", label: "Usuarios" },
   { value: "TD", label: "Conductores" },
+  { value: "UCGEDI", label: "Unit Carga General EDI" },
 ];
 
 export const headerMap: Record<string, string[]> = {

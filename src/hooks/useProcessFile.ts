@@ -20,6 +20,8 @@ import {
   parseUnitCgCombined,
   UnitCgCombinedResult,
 } from "@utils/parseUnitCgCombined";
+import { parseUnitCGEdiSheet } from "@utils/parseUnitCGEdiSheet";
+import { generateUnitCGEDI } from "@utils/generateUnitCGEdi";
 
 export const useProcessFile = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateValue>("BK");
@@ -36,43 +38,51 @@ export const useProcessFile = () => {
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data);
 
-      let parsedData:
-        | Booking[]
-        | BillOfLading[]
-        | BillOfLadingCargaGeneral[]
-        | Unit[]
-        | UnitCargaGeneral[]
-        | User[]
-        | TruckDriver[]
-        | UnitCgCombinedResult[] = [];
+      let xml = "";
 
-      switch (selectedTemplate) {
-        case "BK":
-          parsedData = await parseBookingSheet(workbook);
-          break;
-        case "BL":
-          parsedData = parseBlSheet(workbook);
-          break;
-        case "BLCG":
-          parsedData = parseBlCgSheet(workbook);
-          break;
-        case "U":
-          parsedData = parseUnitSheet(workbook, file.name);
-          break;
-        case "UCG":
-          parsedData = [parseUnitCgCombined(workbook)];
-          break;
-        case "C":
-          parsedData = parseUserSheets(workbook);
-          break;
-        case "TD":
-          parsedData = parseTruckDriverSheets(workbook);
-          break;
+      if (selectedTemplate.endsWith("EDI")) {
+        const { header, units } = parseUnitCGEdiSheet(workbook);
+
+        xml = generateUnitCGEDI(header, units);
+      } else {
+        let parsedData:
+          | Booking[]
+          | BillOfLading[]
+          | BillOfLadingCargaGeneral[]
+          | Unit[]
+          | UnitCargaGeneral[]
+          | User[]
+          | TruckDriver[]
+          | UnitCgCombinedResult[] = [];
+
+        switch (selectedTemplate) {
+          case "BK":
+            parsedData = await parseBookingSheet(workbook);
+            break;
+          case "BL":
+            parsedData = parseBlSheet(workbook);
+            break;
+          case "BLCG":
+            parsedData = parseBlCgSheet(workbook);
+            break;
+          case "U":
+            parsedData = parseUnitSheet(workbook, file.name);
+            break;
+          case "UCG":
+            parsedData = [parseUnitCgCombined(workbook)];
+            break;
+          case "C":
+            parsedData = parseUserSheets(workbook);
+            break;
+          case "TD":
+            parsedData = parseTruckDriverSheets(workbook);
+            break;
+        }
+        xml = generateXML({
+          model: parsedData,
+          selectedTemplate,
+        });
       }
-      const xml = generateXML({
-        model: parsedData,
-        selectedTemplate,
-      });
 
       setXmlContent(xml);
     } catch (error) {
