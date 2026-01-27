@@ -11,6 +11,6 @@ export type TemplateValue =
   | "UCG"
   | "C"
   | "TD"
-  | "UCGEDI";
+  | "SU";
 
 export type XmlConverter<T> = (item: T) => unknown;

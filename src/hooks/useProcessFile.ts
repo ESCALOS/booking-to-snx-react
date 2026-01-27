@@ -22,6 +22,8 @@ import {
 } from "@utils/parseUnitCgCombined";
 import { parseUnitCGEdiSheet } from "@utils/parseUnitCGEdiSheet";
 import { generateUnitCGEDI } from "@utils/generateUnitCGEdi";
+import { StorageUnit } from "../interfaces/storage/storageUnit";
+import { parseUnitStorageSheet } from "@utils/parseUnitStorageSheet";
 
 export const useProcessFile = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateValue>("BK");
@@ -53,6 +55,7 @@ export const useProcessFile = () => {
           | UnitCargaGeneral[]
           | User[]
           | TruckDriver[]
+          | StorageUnit[]
           | UnitCgCombinedResult[] = [];
 
         switch (selectedTemplate) {
@@ -77,6 +80,11 @@ export const useProcessFile = () => {
           case "TD":
             parsedData = parseTruckDriverSheets(workbook);
             break;
+          case "SU":
+            parsedData = parseUnitStorageSheet(workbook);
+            break;
+          default:
+            throw new Error("Unsupported template selected");
         }
         xml = generateXML({
           model: parsedData,

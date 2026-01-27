@@ -10,12 +10,14 @@ import {
   unitToXml,
   truckDriverToXml,
   unitCargaGeneralToXml,
+  storageUnitToXml,
 } from "./transformToXml";
 import { TemplateValue } from "types";
 import { User } from "interfaces/user/user";
 import { TruckDriver } from "interfaces/truckDriver/truckDriver";
 import { BillOfLadingCargaGeneral } from "interfaces/billOfLadingCargaGeneral";
 import { UnitCgCombinedResult } from "./parseUnitCgCombined";
+import { StorageUnit } from "interfaces/storage/storageUnit";
 
 type TemplateModelMap = {
   BK: Booking;
@@ -25,6 +27,7 @@ type TemplateModelMap = {
   UCG: UnitCgCombinedResult;
   C: User;
   TD: TruckDriver;
+  SU: StorageUnit;
 };
 
 const kebabHeaderTag: Record<TemplateValue, string> = {
@@ -35,6 +38,7 @@ const kebabHeaderTag: Record<TemplateValue, string> = {
   UCG: "bill-of-lading",
   C: "user",
   TD: "truck-driver",
+  SU: "unit",
 };
 
 const xmlConverters: {
@@ -47,6 +51,7 @@ const xmlConverters: {
   UCG: () => ({ dummy: "" }), // Placeholder, se maneja especialmente
   C: userToXml,
   TD: truckDriverToXml,
+  SU: storageUnitToXml,
 };
 
 export function generateXML<K extends TemplateValue>(params: {

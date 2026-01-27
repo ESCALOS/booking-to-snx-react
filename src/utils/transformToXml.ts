@@ -6,6 +6,7 @@ import { BillOfLadingCargaGeneral } from "interfaces/billOfLadingCargaGeneral";
 import { User } from "interfaces/user/user";
 import { TruckDriver } from "interfaces/truckDriver/truckDriver";
 import { UnitCargaGeneral } from "interfaces/unitCargaGeneral/unitCargaGeneral";
+import { StorageUnit } from "interfaces/storage/storageUnit";
 
 export const bookingToXml = (booking: Booking): XmlInput => ({
   nbr: booking.nbr,
@@ -199,4 +200,14 @@ export const unitCargaGeneralToXml = (unit: UnitCargaGeneral): XmlInput => ({
           : undefined,
       }
     : undefined,
+});
+
+export const storageUnitToXml = (storageUnit: StorageUnit): XmlInput => ({
+  id: storageUnit.id,
+  category: storageUnit.category,
+  transit_state: storageUnit.transit_state,
+  position: storageUnit.position ? { ...storageUnit.position } : undefined,
+  storage: {
+    storage_last_free_day: storageUnit.storage.storage_last_free_day,
+  },
 });

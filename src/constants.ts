@@ -14,6 +14,7 @@ import { TruckDriverExcel } from "interfaces/truckDriver/truckDriverExcel";
 import { BillOfLadingItemCargaGeneralExcel } from "interfaces/billOfLadingCargaGeneral/billOfLadingItemCargaGeneralExcel";
 import { GoodsBlCargaGeneralExcel } from "interfaces/billOfLadingCargaGeneral";
 import { UnitCargaGeneralExcel } from "interfaces/unitCargaGeneral/unitCargaGeneralExcel";
+import { StorageUnitExcel } from "interfaces/storage/storageUnitExcel";
 
 const bookingExcelExample: BookingExcel = {
   nbr: undefined,
@@ -750,6 +751,7 @@ export const templateOptions: TemplateOption[] = [
   { value: "C", label: "Usuarios" },
   { value: "TD", label: "Conductores" },
   { value: "UCGEDI", label: "Unit Carga General EDI" },
+  { value: "SU", label: "Storage Unit" },
 ];
 
 export const headerMap: Record<string, string[]> = {
@@ -861,3 +863,12 @@ const unitCgExample: UnitCargaGeneralExcel = {
   bl_type: undefined, // T
 };
 export const unitCgHeaders = Object.keys(unitCgExample);
+
+const unitStorageExample: StorageUnitExcel = {
+  unit: undefined,
+  category: undefined,
+  transit_state: undefined,
+  slot: undefined,
+  storage_last_free_day: undefined,
+};
+export const storageUnitHeaders = Object.keys(unitStorageExample);

@@ -12,8 +12,6 @@ export function parseUnitCgSheet(workbook: XLSX.WorkBook): UnitCargaGeneral[] {
     range: 2,
   });
 
-  console.log(jsonData);
-
   return jsonData.map((row: UnitCargaGeneralExcel) => ({
     id: row.id,
     category: row.category,
@@ -44,9 +42,9 @@ export function parseUnitCgSheet(workbook: XLSX.WorkBook): UnitCargaGeneral[] {
       pod_1: row.pod,
       carrier: row.category
         ? generateCarriers(
-          row.category?.toUpperCase().trim() === "EXPORT",
-          row.ob_visit || undefined
-        )
+            row.category?.toUpperCase().trim() === "EXPORT",
+            row.ob_visit || undefined
+          )
         : undefined,
     },
     contents: {
@@ -75,12 +73,12 @@ export function parseUnitCgSheet(workbook: XLSX.WorkBook): UnitCargaGeneral[] {
       row.transit_state?.toUpperCase() === "YARD"
         ? undefined
         : {
-          event: {
-            id: "CG_GENERATE_BILLABLE_EVENTS",
-            time_event_applied: "",
-            user_id: "admin",
-            is_billable: "",
+            event: {
+              id: "CG_GENERATE_BILLABLE_EVENTS",
+              time_event_applied: "",
+              user_id: "admin",
+              is_billable: "",
+            },
           },
-        },
   }));
 }
